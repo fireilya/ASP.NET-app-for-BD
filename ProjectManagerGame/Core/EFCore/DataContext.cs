@@ -1,4 +1,5 @@
-﻿using Core.Utilities;
+﻿using System.Linq;
+using Core.Utilities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
@@ -18,4 +19,6 @@ public class DataContext(
         logger.LogInformation("Context: {contextNumber} Data context model creating", currentContextNumber);
         modelConfigurator.Configure(modelBuilder);
     }
+
+    public IQueryable<TEntity> GetTable<TEntity>() where TEntity : class => Set<TEntity>().AsNoTracking();
 }

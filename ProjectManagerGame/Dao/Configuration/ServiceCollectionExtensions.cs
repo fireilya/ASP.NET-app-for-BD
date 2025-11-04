@@ -1,4 +1,5 @@
 ﻿using Core.EFCore;
+using Dao.DataBase;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Dao.Configuration;

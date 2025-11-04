@@ -4,7 +4,7 @@ using System.Reflection;
 using Core.EFCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace Dao;
+namespace Dao.DataBase;
 
 public class DbContextModelConfigurator : IDbContextModelConfigurator
 {
