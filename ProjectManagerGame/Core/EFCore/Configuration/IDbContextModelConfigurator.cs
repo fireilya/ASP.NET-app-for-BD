@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 
-namespace Core.EFCore;
+namespace Core.EFCore.Configuration;
 
 public interface IDbContextModelConfigurator
 {

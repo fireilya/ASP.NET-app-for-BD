@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 
-namespace Core.EFCore;
+namespace Core.EFCore.Configuration;
 
 public class NpgDbContextOptionsConfigurator(
     IOptions<DataContextOptions> options
