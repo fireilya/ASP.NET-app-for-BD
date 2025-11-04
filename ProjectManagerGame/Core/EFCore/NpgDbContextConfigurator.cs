@@ -1,0 +1,20 @@
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
+
+namespace Core.EFCore;
+
+public class NpgDbContextConfigurator(
+    IOptions<DataContextOptions> options
+) : IDbContextConfigurator
+{
+    public void Configure(DbContextOptionsBuilder optionsBuilder)
+    {
+        var dataContextOptions = options.Value;
+        if (dataContextOptions.EnableSensitiveDataLogging)
+        {
+            optionsBuilder.EnableSensitiveDataLogging();
+        }
+
+        optionsBuilder.UseNpgsql(dataContextOptions.ConnectionString);
+    }
+}
