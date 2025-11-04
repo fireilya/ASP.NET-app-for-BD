@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Reflection;
-using Core.EFCore;
+using Core.EFCore.Configuration;
 using Microsoft.EntityFrameworkCore;
 
 namespace Dao.DataBase;
