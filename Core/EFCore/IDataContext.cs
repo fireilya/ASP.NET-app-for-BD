@@ -22,13 +22,13 @@ public interface IDataContext : IDisposable, IAsyncDisposable
 
     Task UpdatePropertiesAsync<TEntity, TKey>(
         Expression<Func<SetPropertyCalls<TEntity>, SetPropertyCalls<TEntity>>> setProperties,
-        Expression<Func<TEntity, TKey>> primaryKeyPicker,
-        params TKey[] keys
+        Expression<Func<TEntity, TKey>> propertyPicker,
+        params TKey[] values
     ) where TEntity : class;
 
     Task DeleteAsync<TEntity>(TEntity entity) where TEntity : class;
 
-    Task DeleteAsync<TEntity, TKey>(Expression<Func<TEntity, TKey>> primaryKeyPicker, params TKey[] keys)
+    Task DeleteAsync<TEntity, TKey>(Expression<Func<TEntity, TKey>> propertyPicker, params TKey[] values)
         where TEntity : class;
 
     IQueryable<TEntity> GetTable<TEntity>() where TEntity : class;

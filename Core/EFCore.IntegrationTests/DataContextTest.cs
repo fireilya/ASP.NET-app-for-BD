@@ -218,4 +218,79 @@ public class DataContextTest : IntegrationTestBase
         foundEntity.Should()
            .BeEquivalentTo(updatedEntity, options => options.WithDateTimeCloseTo().WithTimeSpanCloseTo());
     }
+
+    [Test]
+    public async Task TestUpdateProperties()
+    {
+        // Arrange
+        const TestEntityState state = TestEntityState.State0;
+        var testEntities = Fixture.Build<TestEntity>()
+           .With(x => x.CreatedAtUtc, Fixture.Create<DateTime>().ToUniversalTime)
+           .With(x => x.State, state)
+           .CreateMany(3)
+           .ToArray();
+        await DataContext.InsertRangeAsync(testEntities);
+
+        // Act
+        const TestEntityState updatedState = TestEntityState.State0;
+        await DataContext.UpdatePropertiesAsync<TestEntity, TestEntityState>(
+            x => x.SetProperty(entity => entity.State, updatedState),
+            x => x.State,
+            state
+        );
+
+        // Assert
+        var foundEntities = await DataContext.SelectAsync<TestEntity, Guid>(
+            x => x.Id,
+            testEntities.Select(x => x.Id).ToArray()
+        );
+        foundEntities.Should().HaveCount(testEntities.Length);
+        foundEntities.Should()
+           .BeEquivalentTo(
+                testEntities,
+                options => options.WithDateTimeCloseTo().WithTimeSpanCloseTo().Excluding(x => x.State)
+            );
+        foreach (var foundEntity in foundEntities)
+        {
+            foundEntity.State.Should().Be(updatedState);
+        }
+    }
+
+    [Test]
+    public async Task TestDelete()
+    {
+        // Arrange
+        var testEntity = Fixture.Build<TestEntity>()
+           .With(x => x.CreatedAtUtc, Fixture.Create<DateTime>().ToUniversalTime)
+           .Create();
+        await DataContext.InsertAsync(testEntity);
+        (await DataContext.FindAsync<TestEntity, Guid>(testEntity.Id)).Should().NotBeNull();
+
+        // Act
+        await DataContext.DeleteAsync(testEntity);
+
+        // Assert
+        (await DataContext.FindAsync<TestEntity, Guid>(testEntity.Id)).Should().BeNull();
+    }
+
+    [Test]
+    public async Task TestDeleteByPropertyValue()
+    {
+        // Arrange
+        var testEntities = Fixture.Build<TestEntity>()
+           .With(x => x.CreatedAtUtc, Fixture.Create<DateTime>().ToUniversalTime)
+           .CreateMany(3)
+           .ToArray();
+        await DataContext.InsertRangeAsync(testEntities);
+        var testEntityIds = testEntities.Select(x => x.Id).ToArray();
+        (await DataContext.SelectAsync<TestEntity, Guid>(x => x.Id, testEntityIds)).Should()
+           .BeEquivalentTo(testEntities, options => options.WithDateTimeCloseTo().WithTimeSpanCloseTo());
+
+        // Act
+        await DataContext.DeleteAsync<TestEntity, string>(x => x.Name, testEntities.Select(x => x.Name).ToArray());
+
+        // Assert
+        var foundEntities = await DataContext.SelectAsync<TestEntity, Guid>(x => x.Id, testEntityIds);
+        foundEntities.Should().BeEmpty();
+    }
 }

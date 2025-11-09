@@ -60,11 +60,11 @@ public class DataContext(
 
     public Task UpdatePropertiesAsync<TEntity, TKey>(
         Expression<Func<SetPropertyCalls<TEntity>, SetPropertyCalls<TEntity>>> setProperties,
-        Expression<Func<TEntity, TKey>> primaryKeyPicker,
-        params TKey[] keys
+        Expression<Func<TEntity, TKey>> propertyPicker,
+        params TKey[] values
     ) where TEntity : class
         => Set<TEntity>()
-           .WhereContains(primaryKeyPicker, keys)
+           .WhereContains(propertyPicker, values)
            .ExecuteUpdateAsync(setProperties);
 
     public async Task DeleteAsync<TEntity>(TEntity entity) where TEntity : class
@@ -73,10 +73,10 @@ public class DataContext(
         await SaveChangesAsync();
     }
 
-    public Task DeleteAsync<TEntity, TKey>(Expression<Func<TEntity, TKey>> primaryKeyPicker, params TKey[] keys)
+    public Task DeleteAsync<TEntity, TKey>(Expression<Func<TEntity, TKey>> propertyPicker, params TKey[] values)
         where TEntity : class
         => Set<TEntity>()
-           .WhereContains(primaryKeyPicker, keys)
+           .WhereContains(propertyPicker, values)
            .ExecuteDeleteAsync();
 
     public IQueryable<TEntity> GetTable<TEntity>() where TEntity : class => Set<TEntity>().AsNoTracking();
