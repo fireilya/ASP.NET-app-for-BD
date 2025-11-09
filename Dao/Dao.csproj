@@ -10,7 +10,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\Core\EFCore\EFCore.csproj" />
+        <ProjectReference Include="..\Core\EFCore\EFCore.csproj"/>
     </ItemGroup>
 
 </Project>

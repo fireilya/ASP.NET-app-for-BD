@@ -1,16 +1,14 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Reflection;
-using Core.EFCore.Configuration;
 using Microsoft.EntityFrameworkCore;
 
-namespace Dao.DataBase;
+namespace Core.EFCore.Configuration;
 
-public class DbContextModelConfigurator : IDbContextModelConfigurator
+public static class ModelBuilderExtensions
 {
-    public void Configure(ModelBuilder modelBuilder)
+    public static void UseAssemblyEntities(this ModelBuilder modelBuilder, Assembly assembly)
     {
-        var assembly = Assembly.GetExecutingAssembly();
         var entityTypes = assembly.GetExportedTypes()
            .Where(x => x.GetCustomAttribute<TableAttribute>() is not null)
            .ToArray();
