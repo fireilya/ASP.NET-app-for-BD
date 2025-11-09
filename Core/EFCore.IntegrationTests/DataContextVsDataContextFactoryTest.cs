@@ -4,6 +4,7 @@ using AutoFixture;
 using Core.EFCore.IntegrationTests.TestsData;
 using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
+using NUnit.Framework;
 using TestCore.Common;
 using TestCore.IntegrationTests;
 

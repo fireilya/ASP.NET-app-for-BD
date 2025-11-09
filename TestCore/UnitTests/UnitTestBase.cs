@@ -3,5 +3,5 @@
 namespace TestCore.UnitTests;
 
 [TestFixture]
-[System.ComponentModel.Category("UnitTests")]
+[Category("UnitTests")]
 public abstract class UnitTestBase;
