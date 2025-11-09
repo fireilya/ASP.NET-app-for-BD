@@ -3,28 +3,21 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Core.EFCore.Configuration;
-using Core.Utilities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query;
 using Microsoft.Extensions.Logging;
 
 namespace Core.EFCore;
 
-public class DataContext : DbContext, IDataContext
+public class DataContext(
+    IDbContextModelConfigurator modelConfigurator,
+    DbContextOptions dbContextOptions,
+    ILogger<DataContext> logger
+) : DbContext(dbContextOptions), IDataContext
 {
-    private const string CounterKey = "DataContextCounter";
-    private readonly IDbContextModelConfigurator modelConfigurator;
-
-    public DataContext(
-        IDbContextModelConfigurator modelConfigurator,
-        ILogger<DataContext> logger,
-        DbContextOptions dbContextOptions
-    ) : base(dbContextOptions)
-    {
-        this.modelConfigurator = modelConfigurator;
-        var number = GlobalCounter.GetCountWithIncrement(CounterKey);
-        logger.LogInformation("Создаём контекст с номером: {number}", number);
-    }
+    // Штука чисто для дебага, можно понаблюдать за работой пула контекстов
+    // ReSharper disable once UnusedMember.Local
+    private readonly int contextNumber = DataContextCounter.GetContextNumber(logger);
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Query;
 
 namespace Core.EFCore;
 
-public interface IDataContext : IDisposable
+public interface IDataContext : IDisposable, IAsyncDisposable
 {
     Task InsertAsync<TEntity>(TEntity entity) where TEntity : class;
     Task InsertRangeAsync<TEntity>(params TEntity[] entities) where TEntity : class;

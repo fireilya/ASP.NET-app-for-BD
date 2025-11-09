@@ -24,6 +24,8 @@ public abstract class IntegrationTestBase
     /// <summary>
     ///     Контекст для тестов. Можно работать с ним не используя тестируемый сервис.
     /// </summary>
-    protected IDataContext DataContext =>
-        SetupFixtureBase.TestConfiguration.ServiceProvider.GetRequiredService<IDataContext>();
+    protected IDataContext DataContext => ServiceProvider.GetRequiredService<IDataContext>();
+
+    protected IDataContextFactory DataContextFactory { get; } =
+        SetupFixtureBase.TestConfiguration.ServiceProvider.GetRequiredService<IDataContextFactory>();
 }
