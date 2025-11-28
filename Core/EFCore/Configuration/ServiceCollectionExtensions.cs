@@ -1,4 +1,5 @@
-﻿using Core.Configuration;
+﻿using System;
+using Core.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Core.EFCore.Configuration;
@@ -17,12 +18,15 @@ public static class ServiceCollectionExtensions
                 PoolSize
             )
            .AddPooledDbContextFactory<DataContext>(
-                (provider, optionsBuilder) =>
-                    provider.GetRequiredService<IDbContextOptionsConfigurator>().Configure(optionsBuilder),
+                _ => { }, // Он почему-то два конфигурируется, так вроде работает
                 PoolSize
             )
+           .AddScoped<IDataContext>(x => x.GetRequiredService<DataContext>())
            .AddSingleton<IDataContextFactory, DataContextFactory>()
-           .AddScoped<IDataContext>(x => x.GetRequiredService<DataContext>());
+           .AddSingleton<ISingletonDataContext, SingletonDataContext>()
+           .AddSingleton<Lazy<INpgOptionsConfigurator?>>(x =>
+                new Lazy<INpgOptionsConfigurator?>(x.GetService<INpgOptionsConfigurator>())
+            );
 
         return serviceCollection;
     }

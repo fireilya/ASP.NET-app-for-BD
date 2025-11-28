@@ -1,0 +1,20 @@
+﻿using System;
+using System.Threading.Tasks;
+using Core.EFCore;
+using Dao.Entities;
+using Domain.FlattenDtos;
+
+namespace Dao.Repositories;
+
+public interface IDistrictRepository : IRepository
+{
+    Task CreateAsync(DistrictDto districtDto);
+    Task<DistrictDto?> FindAsync(Guid districtId);
+    Task UpdateAsync(DistrictDto districtDto);
+    Task DeleteAsync(DistrictDto districtDto);
+}
+
+public class DistrictRepository(
+    ISingletonDataContext dataContext,
+    IEntityConverter<DistrictDbo, DistrictDto> converter
+) : RepositoryBase<DistrictDbo, DistrictDto, Guid>(dataContext, converter, x => x.Id), IDistrictRepository;

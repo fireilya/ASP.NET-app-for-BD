@@ -1,17 +1,22 @@
 ﻿<Solution>
   <Folder Name="/Core/">
-    <Project Path="Core\Common\Common.csproj" Type="Classic C#" />
-    <Project Path="Core\Configuration\Configuration.csproj" Type="Classic C#" />
-    <Project Path="Core\EFCore.IntegrationTests\EFCore.IntegrationTests.csproj" Type="Classic C#" />
-    <Project Path="Core\EFCore\EFCore.csproj" Type="Classic C#" />
-    <Project Path="Core\Logging\Logging.csproj" Type="Classic C#" />
-    <Project Path="Core\Utilities.UnitTests\Utilities.UnitTests.csproj" Type="Classic C#" />
-    <Project Path="Core\Utilities\Utilities.csproj" Type="Classic C#" />
+    <Project Path="Core\Common\Common.csproj" Type="C#" />
+    <Project Path="Core\Configuration\Configuration.csproj" Type="C#" />
+    <Project Path="Core\EFCore.IntegrationTests\EFCore.IntegrationTests.csproj" Type="C#" />
+    <Project Path="Core\EFCore\EFCore.csproj" Type="C#" />
+    <Project Path="Core\Logging\Logging.csproj" Type="C#" />
+    <Project Path="Core\Utilities.UnitTests\Utilities.UnitTests.csproj" Type="C#" />
+    <Project Path="Core\Utilities\Utilities.csproj" Type="C#" />
+  </Folder>
+  <Folder Name="/Dao/">
+    <Project Path="Dao/Dao.IntegrationTests/Dao.IntegrationTests.csproj" />
+    <Project Path="Dao/Dao.UnitTests/Dao.UnitTests.csproj" />
+    <Project Path="Dao/Dao/Dao.csproj" />
   </Folder>
   <Folder Name="/TestCore/">
-    <Project Path="TestCore\Common\Common.csproj" Type="Classic C#" />
-    <Project Path="TestCore\IntegrationTests\IntegrationTests.csproj" Type="Classic C#" />
-    <Project Path="TestCore\UnitTests\UnitTests.csproj" Type="Classic C#" />
+    <Project Path="TestCore\Common\Common.csproj" Type="C#" />
+    <Project Path="TestCore\IntegrationTests\IntegrationTests.csproj" Type="C#" />
+    <Project Path="TestCore\UnitTests\UnitTests.csproj" Type="C#" />
   </Folder>
-  <Project Path="Dao\Dao.csproj" Type="Classic C#" />
+  <Project Path="Domain/Domain.csproj" />
 </Solution>
