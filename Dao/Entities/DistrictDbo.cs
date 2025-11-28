@@ -6,7 +6,7 @@ using Core.EFCore;
 namespace Dao.Entities;
 
 [Table("district")]
-public class District
+public class DistrictDbo
 {
     [Column("id", TypeName = PostgresDataType.Guid), Key]
     public required Guid Id { get; set; }

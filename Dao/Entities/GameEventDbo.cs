@@ -7,7 +7,7 @@ using Domain.Enumerations;
 namespace Dao.Entities;
 
 [Table("event")]
-public class GameEvent
+public class GameEventDbo
 {
     [Column("id", TypeName = PostgresDataType.Guid), Key]
     public required Guid Id { get; set; }
@@ -18,13 +18,13 @@ public class GameEvent
     [Column("research_area_id", TypeName = PostgresDataType.Guid)]
     public required Guid ResearchAreaId { get; set; }
 
-    [Column("event_type", TypeName = PostgresDataType.Enum)]
+    [Column("event_type", TypeName = EnumNames.GameEventType)]
     public required GameEventType EventType { get; set; }
 
     [Column("is_positive", TypeName = PostgresDataType.Bool)]
     public required bool IsPositive { get; set; }
 
-    [Column("name", TypeName = PostgresDataType.Text)]
+    [Column("name", TypeName = PostgresDataType.Text), StringLength(50)]
     public required string Name { get; set; }
 
     [Column("description", TypeName = PostgresDataType.Text)]
