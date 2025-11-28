@@ -8,13 +8,15 @@
     <Project Path="Core\Utilities.UnitTests\Utilities.UnitTests.csproj" Type="C#" />
     <Project Path="Core\Utilities\Utilities.csproj" Type="C#" />
   </Folder>
+  <Folder Name="/Dao/">
+    <Project Path="Dao/Dao.IntegrationTests/Dao.IntegrationTests.csproj" />
+    <Project Path="Dao/Dao.UnitTests/Dao.UnitTests.csproj" />
+    <Project Path="Dao/Dao/Dao.csproj" />
+  </Folder>
   <Folder Name="/TestCore/">
     <Project Path="TestCore\Common\Common.csproj" Type="C#" />
     <Project Path="TestCore\IntegrationTests\IntegrationTests.csproj" Type="C#" />
     <Project Path="TestCore\UnitTests\UnitTests.csproj" Type="C#" />
   </Folder>
-  <Project Path="Dao.IntegrationTests/Dao.IntegrationTests.csproj" />
-  <Project Path="Dao.UnitTests/Dao.UnitTests.csproj" />
-  <Project Path="Dao\Dao.csproj" Type="C#" />
   <Project Path="Domain/Domain.csproj" />
 </Solution>

@@ -10,8 +10,8 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\Core\EFCore\EFCore.csproj"/>
-        <ProjectReference Include="..\Domain\Domain.csproj" />
+        <ProjectReference Include="..\..\Core\EFCore\EFCore.csproj"/>
+        <ProjectReference Include="..\..\Domain\Domain.csproj" />
     </ItemGroup>
 
 </Project>

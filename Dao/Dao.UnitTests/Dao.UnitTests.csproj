@@ -17,7 +17,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Dao\Dao.csproj" />
-      <ProjectReference Include="..\TestCore\UnitTests\UnitTests.csproj" />
+      <ProjectReference Include="..\..\TestCore\UnitTests\UnitTests.csproj" />
     </ItemGroup>
 
 </Project>
