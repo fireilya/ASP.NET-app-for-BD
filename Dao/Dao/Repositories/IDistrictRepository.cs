@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Core.EFCore;
-using Dao.Converters;
 using Dao.Entities;
 using Domain.FlattenDtos;
 
@@ -17,5 +16,5 @@ public interface IDistrictRepository
 
 public class DistrictRepository(
     ISingletonDataContext dataContext,
-    IDistrictConverter converter
+    IEntityConverter<DistrictDbo, DistrictDto> converter
 ) : RepositoryBase<DistrictDbo, DistrictDto, Guid>(dataContext, converter, x => x.Id), IDistrictRepository;

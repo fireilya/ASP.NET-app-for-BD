@@ -4,9 +4,7 @@ using Domain.FlattenDtos;
 
 namespace Dao.Converters;
 
-public interface IDistrictConverter : IEntityConverter<DistrictDbo, DistrictDto>;
-
-public class DistrictConverter : IDistrictConverter
+public class DistrictConverter : IEntityConverter<DistrictDbo, DistrictDto>
 {
     public DistrictDbo ToDbo(DistrictDto dto) => new()
     {

@@ -4,9 +4,7 @@ using Domain.FlattenDtos;
 
 namespace Dao.Converters;
 
-public interface IPlayerSettingsConverter : IEntityConverter<PlayerSettingsDbo, PlayerSettingsDto>;
-
-public class PlayerSettingsConverter : IPlayerSettingsConverter
+public class PlayerSettingsConverter : IEntityConverter<PlayerSettingsDbo, PlayerSettingsDto>
 {
     public PlayerSettingsDbo ToDbo(PlayerSettingsDto dto) => new()
     {

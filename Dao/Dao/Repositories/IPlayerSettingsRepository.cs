@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Core.EFCore;
-using Dao.Converters;
 using Dao.Entities;
 using Domain.FlattenDtos;
 using Microsoft.EntityFrameworkCore;
@@ -18,7 +17,7 @@ public interface IPlayerSettingsRepository
 
 public class PlayerSettingsRepository(
     ISingletonDataContext dataContext,
-    IPlayerSettingsConverter converter
+    IEntityConverter<PlayerSettingsDbo, PlayerSettingsDto> converter
 ) : RepositoryBase<PlayerSettingsDbo, PlayerSettingsDto, Guid>(dataContext, converter, x => x.Id),
     IPlayerSettingsRepository
 {

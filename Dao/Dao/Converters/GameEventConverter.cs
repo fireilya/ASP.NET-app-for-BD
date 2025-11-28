@@ -4,9 +4,7 @@ using Domain.FlattenDtos;
 
 namespace Dao.Converters;
 
-public interface IGameEventConverter : IEntityConverter<GameEventDbo, GameEventDto>;
-
-public class GameEventConverter : IGameEventConverter
+public class GameEventConverter : IEntityConverter<GameEventDbo, GameEventDto>
 {
     public GameEventDbo ToDbo(GameEventDto dto) => new()
     {

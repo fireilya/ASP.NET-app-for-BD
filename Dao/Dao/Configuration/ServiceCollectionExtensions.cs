@@ -1,5 +1,7 @@
-﻿using Core.EFCore.Configuration;
-using Dao.Converters;
+﻿using System.Linq;
+using Core.Common.Linq;
+using Core.EFCore;
+using Core.EFCore.Configuration;
 using Dao.Repositories;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -13,10 +15,26 @@ public static class ServiceCollectionExtensions
     public static IServiceCollection AddDaoServices(this IServiceCollection serviceCollection) => serviceCollection
        .AddSingleton<IDbContextModelConfigurator, DbContextModelConfigurator>()
        .AddSingleton<INpgOptionsConfigurator, NpgOptionsConfigurator>()
-       .AddSingleton<IGameEventConverter, GameEventConverter>()
+       .AddConverters()
        .AddSingleton<IGameEventRepository, GameEventRepository>()
-       .AddSingleton<IDistrictConverter, DistrictConverter>()
        .AddSingleton<IDistrictRepository, DistrictRepository>()
-       .AddSingleton<IPlayerSettingsConverter, PlayerSettingsConverter>()
        .AddSingleton<IPlayerSettingsRepository, PlayerSettingsRepository>();
+
+    private static IServiceCollection AddConverters(this IServiceCollection serviceCollection)
+    {
+        var daoAssembly = DaoAssemblyHelper.GetDaoAssembly();
+        var entityConvererInterfaceName = typeof(IEntityConverter<,>).Name;
+
+        daoAssembly.GetTypes()
+           .Select(type => (
+                Implementation: type,
+                Interface: type.GetInterfaces()
+                   .FirstOrDefault(@interface => @interface.Name == entityConvererInterfaceName))
+            )
+           .Where(pair => pair.Interface != null)
+           .Where(pair => pair.Implementation.IsClass)
+           .Foreach(pair => serviceCollection.AddSingleton(pair.Interface!, pair.Implementation));
+
+        return serviceCollection;
+    }
 }

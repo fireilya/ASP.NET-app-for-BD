@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Core.EFCore;
-using Dao.Converters;
 using Dao.Entities;
 using Domain.FlattenDtos;
 
@@ -19,5 +18,5 @@ public interface IGameEventRepository
 
 public class GameEventRepository(
     ISingletonDataContext dataContext,
-    IGameEventConverter converter
+    IEntityConverter<GameEventDbo, GameEventDto> converter
 ) : RepositoryBase<GameEventDbo, GameEventDto, Guid>(dataContext, converter, x => x.Id), IGameEventRepository;

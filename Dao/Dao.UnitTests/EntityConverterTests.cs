@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Core.EFCore;
-using Dao.Converters;
+using Dao.Configuration;
 using FluentAssertions;
 using NUnit.Framework;
 using TestCore.Common;
@@ -58,7 +58,7 @@ public class EntityConverterTests : UnitTestBase
 
     private static IEnumerable<TestCaseData> GetConverters()
     {
-        var daoAssembly = typeof(IDistrictConverter).Assembly;
+        var daoAssembly = DaoAssemblyHelper.GetDaoAssembly();
         var entityConvererInterfaceType = typeof(IEntityConverter<,>);
         var daoConverters = daoAssembly.GetTypes()
            .Where(type => type.GetInterfaces().Any(@interface => @interface.Name == entityConvererInterfaceType.Name))
