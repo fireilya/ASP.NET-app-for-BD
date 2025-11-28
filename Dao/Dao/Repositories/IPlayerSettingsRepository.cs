@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Dao.Repositories;
 
-public interface IPlayerSettingsRepository
+public interface IPlayerSettingsRepository : IRepository
 {
     Task CreateAsync(PlayerSettingsDto playerSettingsDto);
     Task<PlayerSettingsDto> ReadByPlayerAsync(Guid playerId);

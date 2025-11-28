@@ -6,7 +6,7 @@ using Domain.FlattenDtos;
 
 namespace Dao.Repositories;
 
-public interface IGameEventRepository
+public interface IGameEventRepository : IRepository
 {
     Task CreateAsync(GameEventDto gameEvent);
     Task<GameEventDto?> FindAsync(Guid gameEventId);

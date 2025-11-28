@@ -6,7 +6,7 @@ using Domain.FlattenDtos;
 
 namespace Dao.Repositories;
 
-public interface IDistrictRepository
+public interface IDistrictRepository : IRepository
 {
     Task CreateAsync(DistrictDto districtDto);
     Task<DistrictDto?> FindAsync(Guid districtId);
