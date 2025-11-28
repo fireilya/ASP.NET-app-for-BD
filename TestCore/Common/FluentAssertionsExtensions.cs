@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using AutoFixture;
 using FluentAssertions;
 using FluentAssertions.Collections;
 using FluentAssertions.Equivalency;
@@ -25,6 +26,11 @@ public static class FluentAssertionsExtensions
            .BeCloseTo(x.Subject, precision ?? TimeSpan.FromMilliseconds(10))
         )
        .WhenTypeIs<TimeSpan>();
+
+    public static string CreateJsonString(this Fixture fixture)
+    {
+        return $"{{\"{fixture.Create<string>()}\": \"{fixture.Create<string>()}\"}}";
+    }
 
     public static void ContainCollection<TExpectation>(
         this GenericCollectionAssertions<TExpectation> equivalencyOptions,
