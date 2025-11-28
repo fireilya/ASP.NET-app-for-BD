@@ -18,7 +18,7 @@ public class GameEventDbo
     [Column("research_area_id", TypeName = PostgresDataType.Guid)]
     public required Guid ResearchAreaId { get; set; }
 
-    [Column("event_type", TypeName = EnumNames.GameEventType)]
+    [Column("event_type")]
     public required GameEventType EventType { get; set; }
 
     [Column("is_positive", TypeName = PostgresDataType.Bool)]

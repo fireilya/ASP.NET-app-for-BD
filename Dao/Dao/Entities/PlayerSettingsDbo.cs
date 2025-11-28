@@ -17,7 +17,7 @@ public class PlayerSettingsDbo
     [Column("player_id", TypeName = PostgresDataType.Guid)]
     public required Guid PlayerId { get; set; }
 
-    [Column("screen_mode", TypeName = EnumNames.GameScreenMode)]
+    [Column("screen_mode")]
     public required GameScreenMode EventType { get; set; }
 
     [Column("music_volume", TypeName = PostgresDataType.Short), Range(0, 100)]
