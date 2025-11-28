@@ -1,5 +1,6 @@
 ﻿namespace Domain.Enumerations;
 
+[StorageEnumeration("game_event_type")]
 public enum GameEventType
 {
     MoveAcceleration = 1,
