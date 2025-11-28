@@ -14,5 +14,7 @@ public static class ServiceCollectionExtensions
        .AddSingleton<IDbContextModelConfigurator, DbContextModelConfigurator>()
        .AddSingleton<INpgOptionsConfigurator, NpgOptionsConfigurator>()
        .AddSingleton<IGameEventConverter, GameEventConverter>()
-       .AddSingleton<IGameEventRepository, GameEventRepository>();
+       .AddSingleton<IGameEventRepository, GameEventRepository>()
+       .AddSingleton<IPlayerSettingsConverter, PlayerSettingsConverter>()
+       .AddSingleton<IPlayerSettingsRepository, PlayerSettingsRepository>();
 }

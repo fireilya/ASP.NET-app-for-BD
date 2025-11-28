@@ -12,20 +12,23 @@ public abstract class RepositoryBase<TDbo, TDto, TPrimaryKey>(
     where TDbo : class
     where TDto : class
 {
-    public Task CreateAsync(TDto dto) => dataContext.InsertAsync(converter.ToDbo(dto));
+    protected ISingletonDataContext DataContext { get; } = dataContext;
+    protected IEntityConverter<TDbo, TDto> Converter { get; } = converter;
+
+    public Task CreateAsync(TDto dto) => DataContext.InsertAsync(Converter.ToDbo(dto));
 
     public async Task<TDto?> FindAsync(TPrimaryKey key)
     {
-        var foundDbo = await dataContext.FindAsync<TDbo, TPrimaryKey>(key);
-        return foundDbo is null ? null : converter.ToDto(foundDbo);
+        var foundDbo = await DataContext.FindAsync<TDbo, TPrimaryKey>(key);
+        return foundDbo is null ? null : Converter.ToDto(foundDbo);
     }
 
     public async Task<TDto[]> SelectAsync(TPrimaryKey[] primaryKeys) =>
-        converter.ToDto(await dataContext.SelectAsync(keyPicker, primaryKeys));
+        Converter.ToDto(await DataContext.SelectAsync(keyPicker, primaryKeys));
 
-    public Task UpdateAsync(TDto dto) => dataContext.UpdateAsync(converter.ToDbo(dto));
+    public Task UpdateAsync(TDto dto) => DataContext.UpdateAsync(Converter.ToDbo(dto));
 
-    public Task DeleteAsync(TDto dto) => dataContext.DeleteAsync(converter.ToDbo(dto));
+    public Task DeleteAsync(TDto dto) => DataContext.DeleteAsync(Converter.ToDbo(dto));
 
-    public Task DeleteAsync(params TPrimaryKey[] keys) => dataContext.DeleteAsync(keyPicker, keys);
+    public Task DeleteAsync(params TPrimaryKey[] keys) => DataContext.DeleteAsync(keyPicker, keys);
 }

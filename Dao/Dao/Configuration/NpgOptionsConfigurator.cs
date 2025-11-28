@@ -10,5 +10,6 @@ public class NpgOptionsConfigurator : INpgOptionsConfigurator
     public void Configure(NpgsqlDbContextOptionsBuilder builder)
     {
         builder.MapEnum<GameEventType>(enumName: EnumNames.GameEventType);
+        builder.MapEnum<GameScreenMode>(enumName: EnumNames.GameScreenMode);
     }
 }
