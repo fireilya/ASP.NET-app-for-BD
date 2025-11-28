@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using AutoFixture;
+using AutoFixture.Kernel;
 using FluentAssertions;
 using FluentAssertions.Collections;
 using FluentAssertions.Equivalency;
@@ -31,6 +32,8 @@ public static class FluentAssertionsExtensions
     {
         return $"{{\"{fixture.Create<string>()}\": \"{fixture.Create<string>()}\"}}";
     }
+
+    public static object Create(this Fixture fixture, Type type) => fixture.Create(type, new SpecimenContext(fixture));
 
     public static void ContainCollection<TExpectation>(
         this GenericCollectionAssertions<TExpectation> equivalencyOptions,

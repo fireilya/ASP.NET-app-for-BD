@@ -14,6 +14,7 @@
     <Project Path="TestCore\UnitTests\UnitTests.csproj" Type="C#" />
   </Folder>
   <Project Path="Dao.IntegrationTests/Dao.IntegrationTests.csproj" />
+  <Project Path="Dao.UnitTests/Dao.UnitTests.csproj" />
   <Project Path="Dao\Dao.csproj" Type="C#" />
   <Project Path="Domain/Domain.csproj" />
 </Solution>
