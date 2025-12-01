@@ -21,13 +21,13 @@ public static class ServiceCollectionExtensions
     private static IServiceCollection AddConverters(this IServiceCollection serviceCollection)
     {
         var daoAssembly = DaoAssemblyHelper.GetDaoAssembly();
-        var entityConvererInterfaceName = typeof(IEntityConverter<,>).Name;
+        var entityConverterInterfaceName = typeof(IEntityConverter<,>).Name;
 
         daoAssembly.GetTypes()
            .Select(type => (
                 Implementation: type,
                 Interface: type.GetInterfaces()
-                   .FirstOrDefault(@interface => @interface.Name == entityConvererInterfaceName))
+                   .FirstOrDefault(@interface => @interface.Name == entityConverterInterfaceName))
             )
            .Where(pair => pair.Interface != null)
            .Where(pair => pair.Implementation.IsClass)
