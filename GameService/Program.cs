@@ -1,6 +1,10 @@
+using Dao.Configuration;
+
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddControllers();
+builder.Services
+   .AddDao()
+   .AddControllers();
 
 var app = builder.Build();
 
