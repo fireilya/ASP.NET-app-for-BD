@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Dao.Entities;
 
-[Table("node")]
+[Table("quest_event")]
 public class QuestEventDbo
 {
     [Column("id"), Key]
