@@ -4,27 +4,19 @@ using Domain.FlattenDtos;
 
 namespace Dao.Converters;
 
-public class QuestObstacleConverter : IEntityConverter<ObstacleDbo, ObstacleDto>
+public class QuestObstacleConverter : IEntityConverter<QuestObstacleDbo, QuestObstacleDto>
 {
-    public ObstacleDbo ToDbo(ObstacleDto dto) => new()
+    public QuestObstacleDbo ToDbo(QuestObstacleDto dto) => new()
     {
         Id = dto.Id,
+        ObstacleId = dto.ObstacleId,
         ResearchAreaId = dto.ResearchAreaId,
-        Name = dto.Name,
-        Description = dto.Description,
-        TimeDelayInMinutes = dto.TimeDelayInMinutes,
-        MaxInstance = dto.MaxInstance,
-        PathToIcon = dto.PathToIcon,
     };
 
-    public ObstacleDto ToDto(ObstacleDbo dbo) => new()
+    public QuestObstacleDto ToDto(QuestObstacleDbo dbo) => new()
     {
         Id = dbo.Id,
+        ObstacleId = dbo.ObstacleId,
         ResearchAreaId = dbo.ResearchAreaId,
-        Name = dbo.Name,
-        Description = dbo.Description,
-        TimeDelayInMinutes = dbo.TimeDelayInMinutes,
-        MaxInstance = dbo.MaxInstance,
-        PathToIcon = dbo.PathToIcon,
     };
 }
