@@ -4,8 +4,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Dao.Entities;
 
-[Table("quest_obstacle")]
-public class QuestObstacleDbo
+[Table("obstacle")]
+public class ObstacleDbo
 {
     [Column("id"), Key]
     public required Guid Id { get; set; }

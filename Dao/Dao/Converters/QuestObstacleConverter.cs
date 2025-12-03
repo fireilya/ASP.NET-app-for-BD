@@ -4,9 +4,9 @@ using Domain.FlattenDtos;
 
 namespace Dao.Converters;
 
-public class QuestObstacleConverter : IEntityConverter<QuestObstacleDbo, QuestObstacleDto>
+public class QuestObstacleConverter : IEntityConverter<ObstacleDbo, ObstacleDto>
 {
-    public QuestObstacleDbo ToDbo(QuestObstacleDto dto) => new()
+    public ObstacleDbo ToDbo(ObstacleDto dto) => new()
     {
         Id = dto.Id,
         ResearchAreaId = dto.ResearchAreaId,
@@ -17,7 +17,7 @@ public class QuestObstacleConverter : IEntityConverter<QuestObstacleDbo, QuestOb
         PathToIcon = dto.PathToIcon,
     };
 
-    public QuestObstacleDto ToDto(QuestObstacleDbo dbo) => new()
+    public ObstacleDto ToDto(ObstacleDbo dbo) => new()
     {
         Id = dbo.Id,
         ResearchAreaId = dbo.ResearchAreaId,

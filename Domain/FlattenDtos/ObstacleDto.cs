@@ -2,7 +2,7 @@
 
 namespace Domain.FlattenDtos;
 
-public record QuestObstacleDto
+public record ObstacleDto
 {
     public required Guid Id { get; set; }
     public required Guid ResearchAreaId { get; set; }
