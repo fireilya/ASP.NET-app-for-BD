@@ -1,22 +1,28 @@
 ﻿<Solution>
   <Folder Name="/Core/">
-    <Project Path="Core\Common\Common.csproj" Type="C#" />
-    <Project Path="Core\Configuration\Configuration.csproj" Type="C#" />
-    <Project Path="Core\EFCore.IntegrationTests\EFCore.IntegrationTests.csproj" Type="C#" />
-    <Project Path="Core\EFCore\EFCore.csproj" Type="C#" />
-    <Project Path="Core\Logging\Logging.csproj" Type="C#" />
-    <Project Path="Core\Utilities.UnitTests\Utilities.UnitTests.csproj" Type="C#" />
-    <Project Path="Core\Utilities\Utilities.csproj" Type="C#" />
+    <Project Path="Core\Common\Common.csproj" />
+    <Project Path="Core\Configuration\Configuration.csproj" />
+    <Project Path="Core\EFCore.IntegrationTests\EFCore.IntegrationTests.csproj" />
+    <Project Path="Core\EFCore\EFCore.csproj" />
+    <Project Path="Core\Logging\Logging.csproj" />
+    <Project Path="Core\Utilities.UnitTests\Utilities.UnitTests.csproj" />
+    <Project Path="Core\Utilities\Utilities.csproj" />
   </Folder>
   <Folder Name="/Dao/">
     <Project Path="Dao/Dao.IntegrationTests/Dao.IntegrationTests.csproj" />
     <Project Path="Dao/Dao.UnitTests/Dao.UnitTests.csproj" />
     <Project Path="Dao/Dao/Dao.csproj" />
   </Folder>
+  <Folder Name="/GameService/">
+    <Project Path="GameService/GameService.csproj" />
+  </Folder>
+  <Folder Name="/Solution Items/">
+    <File Path="compose.yaml" />
+  </Folder>
   <Folder Name="/TestCore/">
-    <Project Path="TestCore\Common\Common.csproj" Type="C#" />
-    <Project Path="TestCore\IntegrationTests\IntegrationTests.csproj" Type="C#" />
-    <Project Path="TestCore\UnitTests\UnitTests.csproj" Type="C#" />
+    <Project Path="TestCore\Common\Common.csproj" />
+    <Project Path="TestCore\IntegrationTests\IntegrationTests.csproj" />
+    <Project Path="TestCore\UnitTests\UnitTests.csproj" />
   </Folder>
   <Project Path="Domain/Domain.csproj" />
 </Solution>

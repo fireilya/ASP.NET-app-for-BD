@@ -1,0 +1,14 @@
+﻿services:
+  game-service:
+    build:
+      context: .
+      dockerfile: GameService/Dockerfile
+    container_name: game-service
+    ports:
+      - "8080:80"
+    networks:
+      - game-network
+        
+networks:
+  game-network:
+    driver: bridge
