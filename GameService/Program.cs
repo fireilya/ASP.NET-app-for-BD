@@ -4,6 +4,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services
    .AddDao()
+   .AddSwaggerGen()
    .AddControllers();
 
 var app = builder.Build();
