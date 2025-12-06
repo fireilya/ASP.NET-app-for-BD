@@ -1,14 +1,38 @@
 ﻿services:
   game-service:
+    restart: always
     build:
       context: .
       dockerfile: GameService/Dockerfile
     container_name: game-service
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - DataBaseOptions__Username=${POSTGRES_USER}
+      - DataBaseOptions__Password=${POSTGRES_PASSWORD}
     ports:
       - "8080:80"
     networks:
       - game-network
-        
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:16
+    restart: always
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
+    volumes:
+      - ./postgres_data:/var/lib/postgresql/data
+    networks:
+      - game-network
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
 networks:
   game-network:
     driver: bridge
