@@ -1,17 +1,26 @@
+using Dao.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GameService.Controllers;
 
 [ApiController]
-public class HealthCheckController : ControllerBase
+public class HealthCheckController(
+    IHealthPhraseRepository healthPhraseRepository
+) : ControllerBase
 {
     [HttpGet("health")]
-    public IActionResult GetHealthStatus()
+    public async Task<IActionResult> GetHealthStatus()
     {
+        var healthPhrases = await healthPhraseRepository.SelectAllAsync();
+        var phraseIndex = Random.Shared.Next(0, healthPhrases.Length);
+        var phrase = healthPhrases[phraseIndex];
+
+        await healthPhraseRepository.IncrementAsync(phrase.Id);
+
         return Ok(
             new
             {
-                status = "Да пребудет с тобой Сила",
+                status = phrase.Text,
                 timestamp = DateTimeOffset.Now,
             }
         );
