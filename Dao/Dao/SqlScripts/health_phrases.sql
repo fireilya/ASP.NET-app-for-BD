@@ -1,4 +1,4 @@
-﻿create table health_phrases
+﻿create table if not exists health_phrases
 (
     id         uuid not null,
     text       text not null,
