@@ -12,8 +12,9 @@ public class HealthCheckController(
     public async Task<IActionResult> GetHealthStatus()
     {
         var healthPhrases = await healthPhraseRepository.SelectAllAsync();
-        var phraseIndex = Random.Shared.Next(0, healthPhrases.Length);
-        var phrase = healthPhrases[phraseIndex];
+        var phrasesWithLowFrequency = healthPhrases.OrderBy(x => x.ShowCount).Take(healthPhrases.Length / 3).ToArray();
+        var phraseIndex = Random.Shared.Next(0, phrasesWithLowFrequency.Length);
+        var phrase = phrasesWithLowFrequency[phraseIndex];
 
         await healthPhraseRepository.IncrementAsync(phrase.Id);
 
