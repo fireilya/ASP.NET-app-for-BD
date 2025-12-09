@@ -1,0 +1,10 @@
+using System;
+
+namespace Domain.FlattenDtos;
+
+public class QuestWorkersDto
+{
+    public required Guid Id { get; set; }
+    public required Guid WorkerId { get; set; }
+    public required Guid QuestId { get; set; }
+}
