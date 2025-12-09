@@ -9,14 +9,12 @@ public class InfoSourceLevelConverter : IEntityConverter<InfoSourceLevelDbo, Inf
     public InfoSourceLevelDbo ToDbo(InfoSourceLevelDto dto) => new()
     {
         Id = dto.Id,
-        Level = dto.Level,
         InteractTimeInMinute = dto.InteractTimeInMinute,
     };
 
     public InfoSourceLevelDto ToDto(InfoSourceLevelDbo dbo) => new()
     {
         Id = dbo.Id,
-        Level = dbo.Level,
         InteractTimeInMinute = dbo.InteractTimeInMinute,
     };
 }

@@ -9,7 +9,7 @@ namespace Dao.Repositories;
 public interface IInfoSourceLevelRepository : IRepository
 {
     Task CreateAsync(InfoSourceLevelDto dto);
-    Task<InfoSourceLevelDto?> FindAsync(Guid id);
+    Task<InfoSourceLevelDto?> FindAsync(int id);
     Task UpdateAsync(InfoSourceLevelDto dto);
     Task DeleteAsync(InfoSourceLevelDto dto);
 }
@@ -17,4 +17,4 @@ public interface IInfoSourceLevelRepository : IRepository
 public class InfoSourceLevelRepository(
     ISingletonDataContext dataContext,
     IEntityConverter<InfoSourceLevelDbo, InfoSourceLevelDto> converter
-) : RepositoryBase<InfoSourceLevelDbo, InfoSourceLevelDto, Guid>(dataContext, converter, x => x.Id), IInfoSourceLevelRepository;
+) : RepositoryBase<InfoSourceLevelDbo, InfoSourceLevelDto, int>(dataContext, converter, x => x.Id), IInfoSourceLevelRepository;

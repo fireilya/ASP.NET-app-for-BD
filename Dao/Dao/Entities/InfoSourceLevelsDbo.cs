@@ -8,10 +8,7 @@ namespace Dao.Entities;
 public class InfoSourceLevelDbo
 {
     [Column("id"), Key]
-    public required Guid Id { get; set; }
-
-    [Column("level")]
-    public required Guid Level { get; set; }
+    public required int Id { get; set; }
 
     [Column("interact_time_in_minute")]
     public required short InteractTimeInMinute { get; set; }
