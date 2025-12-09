@@ -15,4 +15,7 @@ public class QuestResourceDbo
 
     [Column("name"), MaxLength(50)]
     public required string Name { get; set; }
+
+    [Column("resource_type")]
+    public required ResourceType Type { get; set; }
 }

@@ -1,20 +1,11 @@
 using System;
-using System.Threading.Tasks;
-using Core.EFCore;
-using Dao.Entities;
-using Domain.FlattenDtos;
 
-namespace Dao.Repositories;
+namespace Domain.FlattenDtos;
 
-public interface IQuestResourceRepository : IRepository
+public class QuestResourceDto
 {
-    Task CreateAsync(QuestResourceDto dto);
-    Task<QuestResourceDto?> FindAsync(Guid id);
-    Task UpdateAsync(QuestResourceDto dto);
-    Task DeleteAsync(QuestResourceDto dto);
+    public required Guid Id { get; set; }
+    public required Guid QuestId { get; set; }
+    public required string Name { get; set; }
+    public required ResourceType Type { get; set; }
 }
-
-public class QuestResourceRepository(
-    ISingletonDataContext dataContext,
-    IEntityConverter<QuestResourceDbo, QuestResourceDto> converter
-) : RepositoryBase<QuestResourceDbo, QuestResourceDto, Guid>(dataContext, converter, x => x.Id), IQuestResourceRepository;

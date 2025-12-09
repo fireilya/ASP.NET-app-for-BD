@@ -1,10 +1,24 @@
-using System;
+using Core.EFCore;
+using Dao.Entities;
+using Domain.FlattenDtos;
 
-namespace Domain.FlattenDtos;
+namespace Dao.Converters;
 
-public class QuestResourceDto
+public class QuestResourceConverter : IEntityConverter<QuestResourceDbo, QuestResourceDto>
 {
-    public required Guid Id { get; set; }
-    public required Guid QuestId { get; set; }
-    public required string Name { get; set; }
+    public QuestResourceDbo ToDbo(QuestResourceDto dto) => new()
+    {
+        Id = dto.Id,
+        QuestId = dto.QuestId,
+        Name = dto.Name,
+        Type = dto.Type,
+    };
+
+    public QuestResourceDto ToDto(QuestResourceDbo dbo) => new()
+    {
+        Id = dbo.Id,
+        QuestId = dbo.QuestId,
+        Name = dbo.Name,
+        Type = dbo.Type,
+    };
 }

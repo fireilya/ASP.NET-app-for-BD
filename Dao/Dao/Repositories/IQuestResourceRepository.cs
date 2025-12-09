@@ -1,22 +1,20 @@
+using System;
+using System.Threading.Tasks;
 using Core.EFCore;
 using Dao.Entities;
 using Domain.FlattenDtos;
 
-namespace Dao.Converters;
+namespace Dao.Repositories;
 
-public class QuestResourceConverter : IEntityConverter<QuestResourceDbo, QuestResourceDto>
+public interface IQuestResourceRepository : IRepository
 {
-    public QuestResourceDbo ToDbo(QuestResourceDto dto) => new()
-    {
-        Id = dto.Id,
-        QuestId = dto.QuestId,
-        Name = dto.Name,
-    };
-
-    public QuestResourceDto ToDto(QuestResourceDbo dbo) => new()
-    {
-        Id = dbo.Id,
-        QuestId = dbo.QuestId,
-        Name = dbo.Name,
-    };
+    Task CreateAsync(QuestResourceDto dto);
+    Task<QuestResourceDto?> FindAsync(Guid id);
+    Task UpdateAsync(QuestResourceDto dto);
+    Task DeleteAsync(QuestResourceDto dto);
 }
+
+public class QuestResourceRepository(
+    ISingletonDataContext dataContext,
+    IEntityConverter<QuestResourceDbo, QuestResourceDto> converter
+) : RepositoryBase<QuestResourceDbo, QuestResourceDto, Guid>(dataContext, converter, x => x.Id), IQuestResourceRepository;
