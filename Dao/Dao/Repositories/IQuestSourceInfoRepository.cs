@@ -14,7 +14,7 @@ public interface IQuestSourceInfoRepository : IRepository
     Task DeleteAsync(QuestSourceInfoDto dto);
 }
 
-public class WorkerRepository(
+public class QuestSourceInfoRepository(
     ISingletonDataContext dataContext,
     IEntityConverter<QuestSourceInfoDbo, QuestSourceInfoDto> converter
 ) : RepositoryBase<QuestSourceInfoDbo, QuestSourceInfoDto, Guid>(dataContext, converter, x => x.Id), IQuestSourceInfoRepository;
