@@ -10,7 +10,7 @@ public class WorkerDbo
     [Column("id"), Key]
     public required Guid Id { get; set; }
 
-    [Column("name")]
+    [Column("name"), MaxLength(30)]
     public required string Name { get; set; }
         
     [Column("effectiveness_coeff")]
