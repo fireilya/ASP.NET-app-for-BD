@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Core.EFCore;
 using Dao.Entities;
 using Domain.FlattenDtos;
+using Domain.Enumerations;
 
 namespace Dao.Repositories;
 
