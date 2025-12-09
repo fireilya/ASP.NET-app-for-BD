@@ -12,7 +12,7 @@ public class InfoSourceConverter : IEntityConverter<InfoSourceDbo, InfoSourceDto
         ResearchAreaId = dto.ResearchAreaId,
         Name = dto.Name,
         InfoText = dto.InfoText,
-        LevelId = dto.LevelId,
+        InfoSourceLevelId = dto.InfoSourceLevelId,
     };
 
     public InfoSourceDto ToDto(InfoSourceDbo dbo) => new()
@@ -21,6 +21,6 @@ public class InfoSourceConverter : IEntityConverter<InfoSourceDbo, InfoSourceDto
         ResearchAreaId = dbo.ResearchAreaId,
         Name = dbo.Name,
         InfoText = dbo.InfoText,
-        LevelId = dbo.LevelId,
+        InfoSourceLevelId = dbo.InfoSourceLevelId,
     };
 }

@@ -7,7 +7,7 @@ namespace Dao.Entities;
 [Table("info_source")]
 public class InfoSourceDbo
 {
-    [Column("info_source_id"), Key]
+    [Column("id"), Key]
     public required Guid Id { get; set; }
 
     [Column("research_area_id")]
@@ -19,6 +19,6 @@ public class InfoSourceDbo
     [Column("info_text")]
     public required string InfoText { get; set; }
 
-    [Column("level")]
-    public required Guid LevelId { get; set; }
+    [Column("info_source_level_id")]
+    public required Guid InfoSourceLevelId { get; set; }
 }
