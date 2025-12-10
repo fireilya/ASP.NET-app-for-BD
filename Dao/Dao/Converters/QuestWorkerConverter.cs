@@ -4,16 +4,16 @@ using Domain.FlattenDtos;
 
 namespace Dao.Converters;
 
-public class QuestWorkersConverter : IEntityConverter<QuestWorkersDbo, QuestWorkersDto>
+public class QuestWorkerConverter : IEntityConverter<QuestWorkerDbo, QuestWorkerDto>
 {
-    public QuestWorkersDbo ToDbo(QuestWorkersDto dto) => new()
+    public QuestWorkerDbo ToDbo(QuestWorkerDto dto) => new()
     {
         Id = dto.Id,
         WorkerId = dto.WorkerId,
         QuestId = dto.QuestId,
     };
 
-    public QuestWorkersDto ToDto(QuestWorkersDbo dbo) => new()
+    public QuestWorkerDto ToDto(QuestWorkerDbo dbo) => new()
     {
         Id = dbo.Id,
         WorkerId = dbo.WorkerId,
