@@ -7,7 +7,7 @@ namespace Dao.Entities;
 [Table("neutralizer")]
 public class NeutralizerDbo
 {
-    [Column("neutralizer_id"), Key]
+    [Column("id"), Key]
     public required Guid Id { get; set; }
 
     [Column("name"), MaxLength(50)]
