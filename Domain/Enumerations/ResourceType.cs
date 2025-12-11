@@ -3,6 +3,6 @@ namespace Domain.Enumerations;
 [StorageEnumeration("resource_type")]
 public enum ResourceType
 {
-    tool = 1,
-    risk = 2,
+    Tool = 1,
+    Risk = 2,
 }
