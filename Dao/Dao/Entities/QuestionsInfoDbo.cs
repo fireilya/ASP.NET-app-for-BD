@@ -17,5 +17,5 @@ public class QuestionsInfoDbo
     public required Guid BriefInfoId { get; set; }
 
     [Column("question_type")]
-    public required Guid QuestionType { get; set; }
+    public required QuestionType Type { get; set; }
 }
