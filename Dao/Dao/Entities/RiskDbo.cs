@@ -7,7 +7,7 @@ namespace Dao.Entities;
 [Table("risk")]
 public class RiskDbo
 {
-    [Column("id"), Key]
+    [Column("resource_id"), Key]
     public required Guid Id { get; set; }
 
     [Column("neutralizer_id")]
