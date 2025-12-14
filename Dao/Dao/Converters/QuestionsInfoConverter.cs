@@ -11,7 +11,7 @@ public class QuestionsInfoConverter : IEntityConverter<QuestionsInfoDbo, Questio
         Id = dto.Id,
         QuestionId = dto.QuestionId,
         BriefInfoId = dto.BriefInfoId,
-        QuestionType = dto.QuestionType,
+        Type = dto.Type,
     };
 
     public QuestionsInfoDto ToDto(QuestionsInfoDbo dbo) => new()
@@ -19,6 +19,6 @@ public class QuestionsInfoConverter : IEntityConverter<QuestionsInfoDbo, Questio
         Id = dbo.Id,
         QuestionId = dbo.QuestionId,
         BriefInfoId = dbo.BriefInfoId,
-        QuestionType = dbo.QuestionType,
+        Type = dbo.Type,
     };
 }
