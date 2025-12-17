@@ -12,9 +12,5 @@ public class ResearchAreaConverter : IEntityConverter<ResearchAreaDbo, ResearchA
         PathToTexture = dto.PathToTexture,
     };
 
-    public ResearchAreaDto ToDto(ResearchAreaDbo dbo) => new()
-    {
-        Id = dbo.Id,
-        PathToTexture = dbo.PathToTexture,
-    };
+    public ResearchAreaDto ToDto(ResearchAreaDbo dbo) => new(dbo.Id, dbo.PathToTexture);
 }

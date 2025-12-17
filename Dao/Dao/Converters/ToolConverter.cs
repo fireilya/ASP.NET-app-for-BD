@@ -12,9 +12,5 @@ public class ToolConverter : IEntityConverter<ToolDbo, ToolDto>
         PathToIcon = dto.PathToIcon,
     };
 
-    public ToolDto ToDto(ToolDbo dbo) => new()
-    {
-        Id = dbo.Id,
-        PathToIcon = dbo.PathToIcon,
-    };
+    public ToolDto ToDto(ToolDbo dbo) => new(dbo.Id, dbo.PathToIcon);
 }

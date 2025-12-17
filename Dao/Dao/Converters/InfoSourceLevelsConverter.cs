@@ -12,9 +12,5 @@ public class InfoSourceLevelConverter : IEntityConverter<InfoSourceLevelDbo, Inf
         InteractTimeInMinute = dto.InteractTimeInMinute,
     };
 
-    public InfoSourceLevelDto ToDto(InfoSourceLevelDbo dbo) => new()
-    {
-        Id = dbo.Id,
-        InteractTimeInMinute = dbo.InteractTimeInMinute,
-    };
+    public InfoSourceLevelDto ToDto(InfoSourceLevelDbo dbo) => new(dbo.Id, dbo.InteractTimeInMinute);
 }

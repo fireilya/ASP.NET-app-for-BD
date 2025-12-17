@@ -13,10 +13,5 @@ public class RiskConverter : IEntityConverter<RiskDbo, RiskDto>
         LocationId = dto.LocationId,
     };
 
-    public RiskDto ToDto(RiskDbo dbo) => new()
-    {
-        Id = dbo.Id,
-        NeutralizerId = dbo.NeutralizerId,
-        LocationId = dbo.LocationId,
-    };
+    public RiskDto ToDto(RiskDbo dbo) => new(dbo.Id, dbo.NeutralizerId, dbo.LocationId);
 }

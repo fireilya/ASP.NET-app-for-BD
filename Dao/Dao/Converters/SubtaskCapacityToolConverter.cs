@@ -14,11 +14,6 @@ public class SubtaskCapacityToolConverter : IEntityConverter<SubtaskCapacityTool
         Capacity = dto.Capacity,
     };
 
-    public SubtaskCapacityToolDto ToDto(SubtaskCapacityToolDbo dbo) => new()
-    {
-        Id = dbo.Id,
-        ResourceId = dbo.ResourceId,
-        SubtaskId = dbo.SubtaskId,
-        Capacity = dbo.Capacity,
-    };
+    public SubtaskCapacityToolDto ToDto(SubtaskCapacityToolDbo dbo) => 
+        new(dbo.Id, dbo.ResourceId, dbo.SubtaskId, dbo.Capacity);
 }

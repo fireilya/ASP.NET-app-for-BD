@@ -13,10 +13,5 @@ public class QuestEventConverter : IEntityConverter<QuestEventDbo, QuestEventDto
         ResearchAreaId = dto.ResearchAreaId,
     };
 
-    public QuestEventDto ToDto(QuestEventDbo dbo) => new()
-    {
-        Id = dbo.Id,
-        EventId = dbo.EventId,
-        ResearchAreaId = dbo.ResearchAreaId,
-    };
+    public QuestEventDto ToDto(QuestEventDbo dbo) => new(dbo.Id, dbo.EventId, dbo.ResearchAreaId);
 }

@@ -14,11 +14,5 @@ public class DistrictConverter : IEntityConverter<DistrictDbo, DistrictDto>
         Description = dto.Description,
     };
 
-    public DistrictDto ToDto(DistrictDbo dbo) => new()
-    {
-        Id = dbo.Id,
-        ResearchAreaId = dbo.ResearchAreaId,
-        Name = dbo.Name,
-        Description = dbo.Description,
-    };
+    public DistrictDto ToDto(DistrictDbo dbo) => new(dbo.Id, dbo.ResearchAreaId, dbo.Name, dbo.Description);
 }

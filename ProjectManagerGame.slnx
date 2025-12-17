@@ -13,6 +13,9 @@
     <Project Path="Dao/Dao.UnitTests/Dao.UnitTests.csproj" />
     <Project Path="Dao/Dao/Dao.csproj" />
   </Folder>
+  <Folder Name="/Domain/">
+    <Project Path="Domain\Domain\Domain.csproj" Type="Classic C#" />
+  </Folder>
   <Folder Name="/GameService/">
     <Project Path="GameService/GameService.csproj" />
   </Folder>
@@ -24,5 +27,4 @@
     <Project Path="TestCore\IntegrationTests\IntegrationTests.csproj" />
     <Project Path="TestCore\UnitTests\UnitTests.csproj" />
   </Folder>
-  <Project Path="Domain/Domain.csproj" />
 </Solution>

@@ -13,10 +13,5 @@ public class QuestObstacleConverter : IEntityConverter<QuestObstacleDbo, QuestOb
         ResearchAreaId = dto.ResearchAreaId,
     };
 
-    public QuestObstacleDto ToDto(QuestObstacleDbo dbo) => new()
-    {
-        Id = dbo.Id,
-        ObstacleId = dbo.ObstacleId,
-        ResearchAreaId = dbo.ResearchAreaId,
-    };
+    public QuestObstacleDto ToDto(QuestObstacleDbo dbo) => new(dbo.Id, dbo.ObstacleId, dbo.ResearchAreaId);
 }

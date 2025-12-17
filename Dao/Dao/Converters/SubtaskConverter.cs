@@ -16,13 +16,6 @@ public class SubtaskConverter : IEntityConverter<SubtaskDbo, SubtaskDto>
         IsUseCapacityTool = dto.IsUseCapacityTool,
     };
 
-    public SubtaskDto ToDto(SubtaskDbo dbo) => new()
-    {
-        Id = dbo.Id,
-        AffectedEntityId = dbo.AffectedEntityId,
-        Name = dbo.Name,
-        Order = dbo.Order,
-        BaseEffectiveness = dbo.BaseEffectiveness,
-        IsUseCapacityTool = dbo.IsUseCapacityTool,
-    };
+    public SubtaskDto ToDto(SubtaskDbo dbo) => 
+        new(dbo.Id, dbo.AffectedEntityId, dbo.Name, dbo.Order, dbo.BaseEffectiveness, dbo.IsUseCapacityTool);
 }

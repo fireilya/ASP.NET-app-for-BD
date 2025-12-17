@@ -17,22 +17,20 @@ public class GameEventConverter : IEntityConverter<GameEventDbo, GameEventDto>
         Description = dto.Description,
         TimeDelayInMinutes = dto.TimeDelayInMinutes,
         Chance = dto.Chance,
-        MaxOccuranceCount = dto.MaxOccuranceCount,
+        MaxOccurenceCount = dto.MaxOccurenceCount,
         EventData = dto.EventData,
     };
 
-    public GameEventDto ToDto(GameEventDbo dbo) => new()
-    {
-        Id = dbo.Id,
-        DistrictId = dbo.DistrictId,
-        ResearchAreaId = dbo.ResearchAreaId,
-        EventType = dbo.EventType,
-        IsPositive = dbo.IsPositive,
-        Name = dbo.Name,
-        Description = dbo.Description,
-        TimeDelayInMinutes = dbo.TimeDelayInMinutes,
-        Chance = dbo.Chance,
-        MaxOccuranceCount = dbo.MaxOccuranceCount,
-        EventData = dbo.EventData,
-    };
+    public GameEventDto ToDto(GameEventDbo dbo) => new(
+        dbo.Id, 
+        dbo.DistrictId, 
+        dbo.ResearchAreaId, 
+        dbo.EventType,
+        dbo.IsPositive,
+        dbo.Name,
+        dbo.Description,
+        dbo.TimeDelayInMinutes,
+        dbo.Chance,
+        dbo.MaxOccurenceCount,
+        dbo.EventData);
 }

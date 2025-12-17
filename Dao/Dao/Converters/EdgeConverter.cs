@@ -11,14 +11,8 @@ public class EdgeConverter : IEntityConverter<EdgeDbo, EdgeDto>
         Id = dto.Id,
         Node1Id = dto.Node1Id,
         Node2Id = dto.Node2Id,
-        EventType = dto.EventType,
+        EdgeType = dto.EdgeType,
     };
 
-    public EdgeDto ToDto(EdgeDbo dbo) => new()
-    {
-        Id = dbo.Id,
-        Node1Id = dbo.Node1Id,
-        Node2Id = dbo.Node2Id,
-        EventType = dbo.EventType,
-    };
+    public EdgeDto ToDto(EdgeDbo dbo) => new(dbo.Id, dbo.Node1Id, dbo.Node2Id, dbo.EdgeType);
 }

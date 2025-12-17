@@ -13,10 +13,5 @@ public class StakeholderConverter : IEntityConverter<StakeholderDbo, Stakeholder
         PathToIcon = dto.PathToIcon,
     };
 
-    public StakeholderDto ToDto(StakeholderDbo dbo) => new()
-    {
-        Id = dbo.Id,
-        Name = dbo.Name,
-        PathToIcon = dbo.PathToIcon,
-    };
+    public StakeholderDto ToDto(StakeholderDbo dbo) => new(dbo.Id, dbo.Name, dbo.PathToIcon);
 }

@@ -18,15 +18,13 @@ public class QuestConverter : IEntityConverter<QuestDbo, QuestDto>
         MaxQuestionsCount = dto.MaxQuestionsCount,
     };
 
-    public QuestDto ToDto(QuestDbo dbo) => new()
-    {
-        Id = dbo.Id,
-        Name = dbo.Name,
-        Description = dbo.Description,
-        Parent = dbo.Parent,
-        StakeholderId = dbo.StakeholderId,
-        ResearchAreaId = dbo.ResearchAreaId,
-        ActionAreaId = dbo.ActionAreaId,
-        MaxQuestionsCount = dbo.MaxQuestionsCount,
-    };
+    public QuestDto ToDto(QuestDbo dbo) => new(
+        dbo.Id, 
+        dbo.Name, 
+        dbo.Description, 
+        dbo.Parent, 
+        dbo.StakeholderId, 
+        dbo.ResearchAreaId, 
+        dbo.ActionAreaId, 
+        dbo.MaxQuestionsCount);
 }
