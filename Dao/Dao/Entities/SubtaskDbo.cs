@@ -7,7 +7,7 @@ namespace Dao.Entities;
 [Table("subtask")]
 public class SubtaskDbo
 {
-    [Column("subtask_id"), Key]
+    [Column("id"), Key]
     public required Guid Id { get; set; }
 
     [Column("affected_entity_id")]
