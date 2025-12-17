@@ -37,7 +37,7 @@ public class GameEventDbo
     public required float Chance { get; set; }
 
     [Column("max_occurance_count")]
-    public required short MaxOccuranceCount { get; set; }
+    public required short MaxOccurenceCount { get; set; }
 
     [Column("event_data", TypeName = PostgresDataType.Json)]
     public required string EventData { get; set; }

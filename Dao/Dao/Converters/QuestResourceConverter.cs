@@ -15,11 +15,5 @@ public class QuestResourceConverter : IEntityConverter<QuestResourceDbo, QuestRe
         Type = dto.Type,
     };
 
-    public QuestResourceDto ToDto(QuestResourceDbo dbo) => new()
-    {
-        Id = dbo.Id,
-        QuestId = dbo.QuestId,
-        Name = dbo.Name,
-        Type = dbo.Type,
-    };
+    public QuestResourceDto ToDto(QuestResourceDbo dbo) => new(dbo.Id, dbo.QuestId, dbo.Name, dbo.Type);
 }

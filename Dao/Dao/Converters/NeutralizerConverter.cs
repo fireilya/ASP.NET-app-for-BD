@@ -13,10 +13,5 @@ public class NeutralizerConverter : IEntityConverter<NeutralizerDbo, Neutralizer
         PathToIcon = dto.PathToIcon,
     };
 
-    public NeutralizerDto ToDto(NeutralizerDbo dbo) => new()
-    {
-        Id = dbo.Id,
-        Name = dbo.Name,
-        PathToIcon = dbo.PathToIcon,
-    };
+    public NeutralizerDto ToDto(NeutralizerDbo dbo) => new(dbo.Id, dbo.Name, dbo.PathToIcon);
 }

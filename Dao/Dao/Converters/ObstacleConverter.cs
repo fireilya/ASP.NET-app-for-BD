@@ -17,14 +17,12 @@ public class ObstacleConverter : IEntityConverter<ObstacleDbo, ObstacleDto>
         PathToIcon = dto.PathToIcon,
     };
 
-    public ObstacleDto ToDto(ObstacleDbo dbo) => new()
-    {
-        Id = dbo.Id,
-        ResearchAreaId = dbo.ResearchAreaId,
-        Name = dbo.Name,
-        Description = dbo.Description,
-        TimeDelayInMinutes = dbo.TimeDelayInMinutes,
-        MaxInstance = dbo.MaxInstance,
-        PathToIcon = dbo.PathToIcon,
-    };
+    public ObstacleDto ToDto(ObstacleDbo dbo) => new(
+        dbo.Id, 
+        dbo.ResearchAreaId, 
+        dbo.Name, 
+        dbo.Description, 
+        dbo.TimeDelayInMinutes, 
+        dbo.MaxInstance, 
+        dbo.PathToIcon);
 }

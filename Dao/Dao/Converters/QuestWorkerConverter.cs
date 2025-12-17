@@ -13,10 +13,5 @@ public class QuestWorkerConverter : IEntityConverter<QuestWorkerDbo, QuestWorker
         QuestId = dto.QuestId,
     };
 
-    public QuestWorkerDto ToDto(QuestWorkerDbo dbo) => new()
-    {
-        Id = dbo.Id,
-        WorkerId = dbo.WorkerId,
-        QuestId = dbo.QuestId,
-    };
+    public QuestWorkerDto ToDto(QuestWorkerDbo dbo) => new(dbo.Id, dbo.WorkerId, dbo.QuestId);
 }

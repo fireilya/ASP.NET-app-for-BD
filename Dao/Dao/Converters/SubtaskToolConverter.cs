@@ -13,10 +13,5 @@ public class SubtaskToolConverter : IEntityConverter<SubtaskToolDbo, SubtaskTool
         SubtaskId = dto.SubtaskId,
     };
 
-    public SubtaskToolDto ToDto(SubtaskToolDbo dbo) => new()
-    {
-        Id = dbo.Id,
-        ResourceId = dbo.ResourceId,
-        SubtaskId = dbo.SubtaskId,
-    };
+    public SubtaskToolDto ToDto(SubtaskToolDbo dbo) => new(dbo.Id, dbo.ResourceId, dbo.SubtaskId);
 }

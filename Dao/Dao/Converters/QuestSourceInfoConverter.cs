@@ -14,11 +14,5 @@ public class QuestSourceInfoConverter : IEntityConverter<QuestSourceInfoDbo, Que
         InfoSourceId = dto.InfoSourceId,
     };
 
-    public QuestSourceInfoDto ToDto(QuestSourceInfoDbo dbo) => new()
-    {
-        Id = dbo.Id,
-        QuestId = dbo.QuestId,
-        ResearchAreaId = dbo.ResearchAreaId,
-        InfoSourceId = dbo.InfoSourceId,
-    };
+    public QuestSourceInfoDto ToDto(QuestSourceInfoDbo dbo) => new(dbo.Id, dbo.QuestId, dbo.ResearchAreaId, dbo.InfoSourceId);
 }

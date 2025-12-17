@@ -18,5 +18,5 @@ public class EdgeDbo
     public required Guid Node2Id { get; set; }
 
     [Column("event_type")]
-    public required EdgeType EventType { get; set; }
+    public required EdgeType EdgeType { get; set; }
 }

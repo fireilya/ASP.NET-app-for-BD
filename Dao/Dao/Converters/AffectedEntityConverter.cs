@@ -12,9 +12,5 @@ public class AffectedEntityConverter : IEntityConverter<AffectedEntityDbo, Affec
         Id = dto.Id,
         AffectedEntityType = dto.AffectedEntityType,
     };
-    public AffectedEntityDto ToDto(AffectedEntityDbo dbo) => new()
-    {
-        Id = dbo.Id,
-        AffectedEntityType = dbo.AffectedEntityType,
-    };
+    public AffectedEntityDto ToDto(AffectedEntityDbo dbo) => new(dbo.Id, dbo.AffectedEntityType);
 }

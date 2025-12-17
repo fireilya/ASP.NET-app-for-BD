@@ -14,11 +14,5 @@ public class LocationConverter : IEntityConverter<LocationDbo, LocationDto>
         PathToIcon = dto.PathToIcon,
     };
 
-    public LocationDto ToDto(LocationDbo dbo) => new()
-    {
-        Id = dbo.Id,
-        ActionAreaId = dbo.ActionAreaId,
-        Name = dbo.Name,
-        PathToIcon = dbo.PathToIcon,
-    };
+    public LocationDto ToDto(LocationDbo dbo) => new(dbo.Id, dbo.ActionAreaId, dbo.Name, dbo.PathToIcon);
 }

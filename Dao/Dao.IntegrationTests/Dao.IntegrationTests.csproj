@@ -16,6 +16,7 @@
     </ItemGroup>
 
     <ItemGroup>
+        <ProjectReference Include="..\..\Domain\Domain\Domain.csproj" />
         <ProjectReference Include="..\Dao\Dao.csproj" />
         <ProjectReference Include="..\..\TestCore\IntegrationTests\IntegrationTests.csproj" />
     </ItemGroup>

@@ -15,12 +15,6 @@ public class InfoSourceConverter : IEntityConverter<InfoSourceDbo, InfoSourceDto
         InfoSourceLevelId = dto.InfoSourceLevelId,
     };
 
-    public InfoSourceDto ToDto(InfoSourceDbo dbo) => new()
-    {
-        Id = dbo.Id,
-        ResearchAreaId = dbo.ResearchAreaId,
-        Name = dbo.Name,
-        InfoText = dbo.InfoText,
-        InfoSourceLevelId = dbo.InfoSourceLevelId,
-    };
+    public InfoSourceDto ToDto(InfoSourceDbo dbo) => 
+        new(dbo.Id, dbo.ResearchAreaId,  dbo.Name, dbo.InfoText, dbo.InfoSourceLevelId);
 }

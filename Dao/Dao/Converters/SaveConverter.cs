@@ -12,9 +12,5 @@ public class SaveConverter : IEntityConverter<SaveDbo, SaveDto>
         Time = dto.Time,
     };
 
-    public SaveDto ToDto(SaveDbo dbo) => new()
-    {
-        Id = dbo.Id,
-        Time = dbo.Time,
-    };
+    public SaveDto ToDto(SaveDbo dbo) => new(dbo.Id, dbo.Time);
 }

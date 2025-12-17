@@ -12,9 +12,5 @@ public class NodeConverter : IEntityConverter<NodeDbo, NodeDto>
         DistrictId = dto.DistrictId,
     };
 
-    public NodeDto ToDto(NodeDbo dbo) => new()
-    {
-        Id = dbo.Id,
-        DistrictId = dbo.DistrictId,
-    };
+    public NodeDto ToDto(NodeDbo dbo) => new(dbo.Id, dbo.DistrictId);
 }

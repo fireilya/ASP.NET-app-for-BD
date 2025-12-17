@@ -14,11 +14,5 @@ public class PassedQuestsConverter : IEntityConverter<PassedQuestsDbo, PassedQue
         Score = dto.Score,
     };
 
-    public PassedQuestsDto ToDto(PassedQuestsDbo dbo) => new()
-    {
-        Id = dbo.Id,
-        SaveId = dbo.SaveId,
-        QuestId = dbo.QuestId,
-        Score = dbo.Score,
-    };
+    public PassedQuestsDto ToDto(PassedQuestsDbo dbo) => new(dbo.Id, dbo.SaveId, dbo.QuestId, dbo.Score);
 }

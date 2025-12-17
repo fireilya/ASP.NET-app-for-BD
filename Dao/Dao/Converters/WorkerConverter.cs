@@ -11,12 +11,8 @@ public class WorkerConverter : IEntityConverter<WorkerDbo, WorkerDto>
         Id = dto.Id,
         Name = dto.Name,
         EffectivenessCoeff = dto.EffectivenessCoeff,
+        PathToIcon = dto.PathToIcon
     };
 
-    public WorkerDto ToDto(WorkerDbo dbo) => new()
-    {
-        Id = dbo.Id,
-        Name = dbo.Name,
-        EffectivenessCoeff = dbo.EffectivenessCoeff,
-    };
+    public WorkerDto ToDto(WorkerDbo dbo) => new(dbo.Id, dbo.Name, dbo.PathToIcon, dbo.EffectivenessCoeff);
 }

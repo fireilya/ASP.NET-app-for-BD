@@ -13,10 +13,5 @@ public class HealthPhraseConverter : IEntityConverter<HealthPhraseDbo, HealthPhr
         ShowCount = dto.ShowCount,
     };
 
-    public HealthPhraseDto ToDto(HealthPhraseDbo dbo) => new()
-    {
-        Id = dbo.Id,
-        Text = dbo.Text,
-        ShowCount = dbo.ShowCount,
-    };
+    public HealthPhraseDto ToDto(HealthPhraseDbo dbo) => new(dbo.Id, dbo.Text, dbo.ShowCount);
 }
