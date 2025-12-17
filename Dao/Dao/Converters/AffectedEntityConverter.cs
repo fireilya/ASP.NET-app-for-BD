@@ -1,0 +1,20 @@
+﻿using System;
+using Core.EFCore;
+using Dao.Entities;
+using Domain.FlattenDtos;
+
+namespace Dao.Converters;
+
+public class AffectedEntityConverter : IEntityConverter<AffectedEntityDbo, AffectedEntityDto>
+{
+    public AffectedEntityDbo ToDbo(AffectedEntityDto dto) => new()
+    {
+        Id = dto.Id,
+        AffectedEntityType = dto.AffectedEntityType,
+    };
+    public AffectedEntityDto ToDto(AffectedEntityDbo dbo) => new()
+    {
+        Id = dbo.Id,
+        AffectedEntityType = dbo.AffectedEntityType,
+    };
+}
