@@ -15,4 +15,10 @@ public class RiskDbo
 
     [Column("location_id")]
     public required Guid LocationId { get; set; }
+
+    [Column("description")]
+    public required string Description { get; set; }
+
+    [Column("path_to_icon")]
+    public required string PathToIcon { get; set; }
 }

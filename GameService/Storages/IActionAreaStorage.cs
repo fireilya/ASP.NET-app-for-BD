@@ -109,6 +109,8 @@ public class ActionAreaStorage(
         // TODO: Обработка null случая
         return new Risk(
             riskDto.Id,
+            riskDto.PathToIcon,
+            riskDto.Description,
             new Neutralizer(neutralizerDto!.Id, neutralizerDto.Name, neutralizerDto.PathToIcon)
         );
     }
