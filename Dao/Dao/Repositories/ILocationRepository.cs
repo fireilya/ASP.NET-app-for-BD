@@ -14,8 +14,7 @@ public interface ILocationRepository : IRepository
     Task<LocationDto?> FindAsync(Guid id);
     Task UpdateAsync(LocationDto dto);
     Task DeleteAsync(LocationDto dto);
-    
-    Task<LocationDto[]> FindAllForActionAreaAsync(Guid actionAreaId);
+    Task<LocationDto[]> SelectByActionAreaIdAsync(Guid actionAreaId);
 }
 
 public class LocationRepository(
@@ -23,13 +22,13 @@ public class LocationRepository(
     IEntityConverter<LocationDbo, LocationDto> converter
 ) : RepositoryBase<LocationDbo, LocationDto, Guid>(dataContext, converter, x => x.Id), ILocationRepository
 {
-    public async Task<LocationDto[]> FindAllForActionAreaAsync(Guid actionAreaId)
+    public async Task<LocationDto[]> SelectByActionAreaIdAsync(Guid actionAreaId)
     {
-        var locations = await DataContext.ExecuteQueryAsync<LocationDbo, LocationDbo[]>(
-            query => query
-                .Where(x => x.ActionAreaId == actionAreaId)
-                .ToArrayAsync());
-        
+        var locations = await DataContext.ExecuteQueryAsync<LocationDbo, LocationDbo[]>(query => query
+           .Where(x => x.ActionAreaId == actionAreaId)
+           .ToArrayAsync()
+        );
+
         return Converter.ToDto(locations);
     }
 }

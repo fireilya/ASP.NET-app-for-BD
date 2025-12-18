@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Core.EFCore;
@@ -15,30 +14,34 @@ public interface ISubtaskCapacityToolRepository : IRepository
     Task<SubtaskCapacityToolDto?> FindAsync(Guid id);
     Task UpdateAsync(SubtaskCapacityToolDto dto);
     Task DeleteAsync(SubtaskCapacityToolDto dto);
-    Task<Dictionary<Guid, short>> FindToolCapacityMappingForSubtaskAsync(Guid subtaskId);
-    Task<short> FindBaseCapacityForSubtaskAsync(Guid subtaskId);
+    Task<SubtaskCapacityToolDto[]> SelectBySubtaskIdAsync(Guid subtaskId);
+    Task<SubtaskCapacityToolDto> ReadBaseBySubtaskIdAsync(Guid subtaskId);
 }
 
 public class SubtaskCapacityToolRepository(
     ISingletonDataContext dataContext,
     IEntityConverter<SubtaskCapacityToolDbo, SubtaskCapacityToolDto> converter
-) : RepositoryBase<SubtaskCapacityToolDbo, SubtaskCapacityToolDto, Guid>(dataContext, converter, x => x.Id), ISubtaskCapacityToolRepository
+) : RepositoryBase<SubtaskCapacityToolDbo, SubtaskCapacityToolDto, Guid>(dataContext, converter, x => x.Id),
+    ISubtaskCapacityToolRepository
 {
-    public async Task<Dictionary<Guid, short>> FindToolCapacityMappingForSubtaskAsync(Guid subtaskId)
+    public async Task<SubtaskCapacityToolDto[]> SelectBySubtaskIdAsync(Guid subtaskId)
     {
-        var toolsCapacity = await
-            DataContext.ExecuteQueryAsync<SubtaskCapacityToolDbo, SubtaskCapacityToolDbo[]>(query => query
-                .Where(x => x.SubtaskId == subtaskId)
-                .ToArrayAsync());
-        return toolsCapacity.ToDictionary(x => x.ResourceId, x => x.Capacity);
+        var subtaskCapacityToolDbos =
+            await DataContext.ExecuteQueryAsync<SubtaskCapacityToolDbo, SubtaskCapacityToolDbo[]>(query => query
+               .Where(x => x.SubtaskId == subtaskId)
+               .ToArrayAsync()
+            );
+        return Converter.ToDto(subtaskCapacityToolDbos);
     }
 
-    public async Task<short> FindBaseCapacityForSubtaskAsync(Guid subtaskId)
+    public async Task<SubtaskCapacityToolDto> ReadBaseBySubtaskIdAsync(Guid subtaskId)
     {
-        var toolCapacity = await 
+        var subtaskCapacityToolDbo = await
             DataContext.ExecuteQueryAsync<SubtaskCapacityToolDbo, SubtaskCapacityToolDbo>(query => query
-                .Where(x => x.ResourceId == Guid.Empty)
-                .FirstAsync());
-        return toolCapacity.Capacity;
+               .Where(x => x.SubtaskId == subtaskId)
+               .Where(x => x.ResourceId == null) // Костыль. Запись для подзадачи без ресурса означает пустую руку
+               .FirstAsync()
+            );
+        return Converter.ToDto(subtaskCapacityToolDbo);
     }
 }

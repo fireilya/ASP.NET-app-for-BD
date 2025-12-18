@@ -11,7 +11,7 @@ public class SubtaskCapacityToolDbo
     public required Guid Id { get; set; }
 
     [Column("resource_id")]
-    public required Guid ResourceId { get; set; }
+    public required Guid? ResourceId { get; set; }
 
     [Column("subtask_id")]
     public required Guid SubtaskId { get; set; }

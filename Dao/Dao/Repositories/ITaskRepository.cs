@@ -14,8 +14,7 @@ public interface ITaskRepository : IRepository
     Task<TaskDto?> FindAsync(Guid id);
     Task UpdateAsync(TaskDto dto);
     Task DeleteAsync(TaskDto dto);
-    
-    Task<TaskDto[]> FindAllForLocationAsync(Guid locationId);
+    Task<TaskDto[]> SelectByLocationIdAsync(Guid locationId);
 }
 
 public class TaskRepository(
@@ -23,12 +22,12 @@ public class TaskRepository(
     IEntityConverter<TaskDbo, TaskDto> converter
 ) : RepositoryBase<TaskDbo, TaskDto, Guid>(dataContext, converter, x => x.Id), ITaskRepository
 {
-    public async Task<TaskDto[]> FindAllForLocationAsync(Guid locationId)
+    public async Task<TaskDto[]> SelectByLocationIdAsync(Guid locationId)
     {
-        var tasks = await DataContext.ExecuteQueryAsync<TaskDbo, TaskDbo[]>(
-            query => query
-            .Where(x => x.LocationId == locationId)
-            .ToArrayAsync());
+        var tasks = await DataContext.ExecuteQueryAsync<TaskDbo, TaskDbo[]>(query => query
+           .Where(x => x.LocationId == locationId)
+           .ToArrayAsync()
+        );
         return Converter.ToDto(tasks);
     }
 }

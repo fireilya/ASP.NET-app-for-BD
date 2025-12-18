@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Dao.Repositories;
@@ -36,7 +35,7 @@ public class ActionAreaStorage(
 
     private async Task<Location[]> BuildLocationsArrayForActionAreaAsync(Guid actionAreaId)
     {
-        var locationsDto = await locationRepository.FindAllForActionAreaAsync(actionAreaId);
+        var locationsDto = await locationRepository.SelectByActionAreaIdAsync(actionAreaId);
         var answer = new List<Location>();
         foreach (var dto in locationsDto)
         {
@@ -50,7 +49,7 @@ public class ActionAreaStorage(
 
     private async Task<GameTask[]> BuildTasksArrayForLocationAsync(Guid locationId)
     {
-        var tasksDto = await taskRepository.FindAllForLocationAsync(locationId);
+        var tasksDto = await taskRepository.SelectByLocationIdAsync(locationId);
         var answer = new List<GameTask>();
         foreach (var dto in tasksDto)
         {
@@ -63,35 +62,45 @@ public class ActionAreaStorage(
 
     private async Task<Subtask[]> BuildSubtasksArrayForTaskAsync(Guid taskId)
     {
-        var subtasksDto = await subtaskRepository.FindAllForTaskAsync(taskId);
+        var subtasksDto = await subtaskRepository.SelectByTaskIdAsync(taskId);
         var answer = new List<Subtask>();
         foreach (var dto in subtasksDto)
         {
             if (dto.IsUseCapacityTool)
             {
-                var baseCapacity = await subtaskCapacityToolRepository.FindBaseCapacityForSubtaskAsync(dto.Id);
-                var toolCapacityDictionary =
-                    await subtaskCapacityToolRepository.FindToolCapacityMappingForSubtaskAsync(dto.Id);
+                var baseCapacity = await subtaskCapacityToolRepository.ReadBaseBySubtaskIdAsync(dto.Id);
+                var toolCapacityDictionary = await subtaskCapacityToolRepository.SelectBySubtaskIdAsync(dto.Id);
+                var capacityByResource = toolCapacityDictionary
+                   .Where(x => x.ResourceId is not null)
+                   .ToDictionary(x => x.ResourceId!.Value, x => x.Capacity);
                 var subtask = new CapacitySubtask(
                     dto.Id,
                     dto.Name,
                     dto.BaseEffectiveness,
                     dto.IsUseCapacityTool,
-                    baseCapacity,
-                    toolCapacityDictionary);
-                if (answer.Count != 0) subtask.PreviousSubtask = answer.Last();
+                    baseCapacity.Capacity,
+                    capacityByResource
+                );
+                if (answer.Count != 0)
+                {
+                    subtask.PreviousSubtask = answer.Last();
+                }
+
                 answer.Add(subtask);
                 continue;
             }
 
-            var subtaskToolDto = await subtaskToolRepository.FindToolForSubtaskAsync(dto.Id);
+            var subtaskToolDto = await subtaskToolRepository.FindBySubtaskIdAsync(dto.Id);
             // TODO: Обработка null случая
-            answer.Add(new ProcessSubtask(
-                dto.Id,
-                dto.Name,
-                dto.BaseEffectiveness,
-                dto.IsUseCapacityTool,
-                subtaskToolDto!.ResourceId));
+            answer.Add(
+                new ProcessSubtask(
+                    dto.Id,
+                    dto.Name,
+                    dto.BaseEffectiveness,
+                    dto.IsUseCapacityTool,
+                    subtaskToolDto!.ResourceId
+                )
+            );
         }
 
         return answer.ToArray();
@@ -102,37 +111,51 @@ public class ActionAreaStorage(
         var riskDto = await riskRepository.FindRiskForLocationAsync(locationId);
         var neutralizerDto = await neutralizerRepository.FindAsync(riskDto.NeutralizerId);
         // TODO: Обработка null случая
-        return new Risk(riskDto.Id,
-            new Neutralizer(neutralizerDto!.Id, neutralizerDto.Name, neutralizerDto.PathToIcon));
+        return new Risk(
+            riskDto.Id,
+            new Neutralizer(neutralizerDto!.Id, neutralizerDto.Name, neutralizerDto.PathToIcon)
+        );
     }
 
     public async Task UploadDomainAsync(ActionArea actionArea)
     {
         await actionAreaRepository.CreateAsync(
-            new ActionAreaDto(actionArea.Id, actionArea.PathToTexture, actionArea.Name));
+            new ActionAreaDto(actionArea.Id, actionArea.PathToTexture, actionArea.Name)
+        );
         foreach (var location in actionArea.Locations)
         {
             await locationRepository.CreateAsync(
-                new LocationDto(location.Id, actionArea.Id, location.Name, location.PathToIcon));
-            
+                new LocationDto(location.Id, actionArea.Id, location.Name, location.PathToIcon)
+            );
+
             foreach (var task in location.Tasks)
             {
                 await taskRepository.CreateAsync(
-                    new TaskDto(Guid.NewGuid(), task.Id, location.Id, task.Name, task.Target, task.DayLimit,
-                        task.IsTrue));
-                
+                    new TaskDto(
+                        Guid.NewGuid(),
+                        task.Id,
+                        location.Id,
+                        task.Name,
+                        task.Target,
+                        task.DayLimit,
+                        task.IsTrue
+                    )
+                );
+
                 for (var i = 0; i < task.Subtasks.Length; i++)
                 {
                     var subtask = task.Subtasks[i];
 
                     await subtaskRepository.CreateAsync(
                         new SubtaskDto(
-                            subtask.Id, 
-                            subtask.Parent!.Id, 
-                            subtask.Name, 
-                            (short)i, 
+                            subtask.Id,
+                            subtask.Parent!.Id,
+                            subtask.Name,
+                            (short)i,
                             subtask.BaseEfficiency,
-                            subtask.IsUseCapacityTool));
+                            subtask.IsUseCapacityTool
+                        )
+                    );
                 }
             }
         }

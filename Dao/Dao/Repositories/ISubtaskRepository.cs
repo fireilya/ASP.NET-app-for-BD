@@ -14,8 +14,7 @@ public interface ISubtaskRepository : IRepository
     Task<SubtaskDto?> FindAsync(Guid id);
     Task UpdateAsync(SubtaskDto dto);
     Task DeleteAsync(SubtaskDto dto);
-    
-    Task<SubtaskDto[]> FindAllForTaskAsync(Guid taskId);
+    Task<SubtaskDto[]> SelectByTaskIdAsync(Guid taskId);
 }
 
 public class SubtaskRepository(
@@ -23,12 +22,13 @@ public class SubtaskRepository(
     IEntityConverter<SubtaskDbo, SubtaskDto> converter
 ) : RepositoryBase<SubtaskDbo, SubtaskDto, Guid>(dataContext, converter, x => x.Id), ISubtaskRepository
 {
-    public async Task<SubtaskDto[]> FindAllForTaskAsync(Guid taskId)
+    public async Task<SubtaskDto[]> SelectByTaskIdAsync(Guid taskId)
     {
         var subtasks = await DataContext.ExecuteQueryAsync<SubtaskDbo, SubtaskDbo[]>(query => query
-            .Where(x => x.AffectedEntityId == taskId)
-            .OrderBy(x => x.Order)
-            .ToArrayAsync());
+           .Where(x => x.AffectedEntityId == taskId)
+           .OrderBy(x => x.Order)
+           .ToArrayAsync()
+        );
         return Converter.ToDto(subtasks);
     }
 }

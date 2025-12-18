@@ -14,8 +14,7 @@ public interface ISubtaskToolRepository : IRepository
     Task<SubtaskToolDto?> FindAsync(Guid id);
     Task UpdateAsync(SubtaskToolDto dto);
     Task DeleteAsync(SubtaskToolDto dto);
-    
-    Task<SubtaskToolDto?> FindToolForSubtaskAsync(Guid subtaskId);
+    Task<SubtaskToolDto?> FindBySubtaskIdAsync(Guid subtaskId);
 }
 
 public class SubtaskToolRepository(
@@ -23,11 +22,15 @@ public class SubtaskToolRepository(
     IEntityConverter<SubtaskToolDbo, SubtaskToolDto> converter
 ) : RepositoryBase<SubtaskToolDbo, SubtaskToolDto, Guid>(dataContext, converter, x => x.Id), ISubtaskToolRepository
 {
-    public async Task<SubtaskToolDto?> FindToolForSubtaskAsync(Guid subtaskId)
+    public async Task<SubtaskToolDto?> FindBySubtaskIdAsync(Guid subtaskId)
     {
-        return Converter.ToDto(await DataContext.ExecuteQueryAsync<SubtaskToolDbo, SubtaskToolDbo>(
-            query => query
-                .Where(x => x.SubtaskId == subtaskId)
-                .FirstAsync()));
+        var subtaskToolDbo = await DataContext.ExecuteQueryAsync<SubtaskToolDbo, SubtaskToolDbo?>(query => query
+           .Where(x => x.SubtaskId == subtaskId)
+           .FirstOrDefaultAsync()
+        );
+
+        return subtaskToolDbo != null
+            ? Converter.ToDto(subtaskToolDbo)
+            : null;
     }
 }
