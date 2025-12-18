@@ -16,6 +16,12 @@ public class QuestionConverter : IEntityConverter<QuestionDbo, QuestionDto>
         Type = dto.Type,
     };
 
-    public QuestionDto ToDto(QuestionDbo dbo) => 
-        new(dbo.Id, dbo.QuestId, dbo.ParentId, dbo.Content, dbo.Answer, dbo.Type);
+    public QuestionDto ToDto(QuestionDbo dbo) => new(
+        dbo.Id,
+        dbo.QuestId,
+        dbo.ParentId,
+        dbo.Content,
+        dbo.Answer,
+        dbo.Type
+    );
 }

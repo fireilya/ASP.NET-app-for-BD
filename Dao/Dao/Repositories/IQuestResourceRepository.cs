@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 using Core.EFCore;
 using Dao.Entities;
 using Domain.FlattenDtos;
-using Domain.Enumerations;
 
 namespace Dao.Repositories;
 
@@ -18,4 +17,5 @@ public interface IQuestResourceRepository : IRepository
 public class QuestResourceRepository(
     ISingletonDataContext dataContext,
     IEntityConverter<QuestResourceDbo, QuestResourceDto> converter
-) : RepositoryBase<QuestResourceDbo, QuestResourceDto, Guid>(dataContext, converter, x => x.Id), IQuestResourceRepository;
+) : RepositoryBase<QuestResourceDbo, QuestResourceDto, Guid>(dataContext, converter, x => x.Id),
+    IQuestResourceRepository;

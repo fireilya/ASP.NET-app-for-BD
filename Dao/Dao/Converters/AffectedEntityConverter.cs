@@ -1,5 +1,4 @@
-﻿using System;
-using Core.EFCore;
+﻿using Core.EFCore;
 using Dao.Entities;
 using Domain.FlattenDtos;
 
@@ -12,5 +11,6 @@ public class AffectedEntityConverter : IEntityConverter<AffectedEntityDbo, Affec
         Id = dto.Id,
         AffectedEntityType = dto.AffectedEntityType,
     };
+
     public AffectedEntityDto ToDto(AffectedEntityDbo dbo) => new(dbo.Id, dbo.AffectedEntityType);
 }

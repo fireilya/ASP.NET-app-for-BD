@@ -18,11 +18,12 @@ public class ObstacleConverter : IEntityConverter<ObstacleDbo, ObstacleDto>
     };
 
     public ObstacleDto ToDto(ObstacleDbo dbo) => new(
-        dbo.Id, 
-        dbo.ResearchAreaId, 
-        dbo.Name, 
-        dbo.Description, 
-        dbo.TimeDelayInMinutes, 
-        dbo.MaxInstance, 
-        dbo.PathToIcon);
+        dbo.Id,
+        dbo.ResearchAreaId,
+        dbo.Name,
+        dbo.Description,
+        dbo.TimeDelayInMinutes,
+        dbo.MaxInstance,
+        dbo.PathToIcon
+    );
 }

@@ -12,10 +12,10 @@ public class WorkerDbo
 
     [Column("name"), MaxLength(30)]
     public required string Name { get; set; }
-    
+
     [Column("path_to_icon")]
     public required string PathToIcon { get; set; }
-        
+
     [Column("effectiveness_coeff")]
     public required double EffectivenessCoeff { get; set; }
 }

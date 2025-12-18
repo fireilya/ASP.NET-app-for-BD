@@ -19,12 +19,13 @@ public class QuestConverter : IEntityConverter<QuestDbo, QuestDto>
     };
 
     public QuestDto ToDto(QuestDbo dbo) => new(
-        dbo.Id, 
-        dbo.Name, 
-        dbo.Description, 
-        dbo.Parent, 
-        dbo.StakeholderId, 
-        dbo.ResearchAreaId, 
-        dbo.ActionAreaId, 
-        dbo.MaxQuestionsCount);
+        dbo.Id,
+        dbo.Name,
+        dbo.Description,
+        dbo.Parent,
+        dbo.StakeholderId,
+        dbo.ResearchAreaId,
+        dbo.ActionAreaId,
+        dbo.MaxQuestionsCount
+    );
 }

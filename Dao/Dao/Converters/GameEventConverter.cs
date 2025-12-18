@@ -22,9 +22,9 @@ public class GameEventConverter : IEntityConverter<GameEventDbo, GameEventDto>
     };
 
     public GameEventDto ToDto(GameEventDbo dbo) => new(
-        dbo.Id, 
-        dbo.DistrictId, 
-        dbo.ResearchAreaId, 
+        dbo.Id,
+        dbo.DistrictId,
+        dbo.ResearchAreaId,
         dbo.EventType,
         dbo.IsPositive,
         dbo.Name,

@@ -15,6 +15,11 @@ public class BriefInfoConverter : IEntityConverter<BriefInfoDbo, BriefInfoDto>
         Content = dto.Content,
     };
 
-    public BriefInfoDto ToDto(BriefInfoDbo dbo) => 
-        new(dbo.Id, dbo.QuestId, dbo.IsTrue, dbo.AffectedEntityId, dbo.Content);
+    public BriefInfoDto ToDto(BriefInfoDbo dbo) => new(
+        dbo.Id,
+        dbo.QuestId,
+        dbo.IsTrue,
+        dbo.AffectedEntityId,
+        dbo.Content
+    );
 }

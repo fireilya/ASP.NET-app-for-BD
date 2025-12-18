@@ -17,10 +17,11 @@ public class PlayerSettingsConverter : IEntityConverter<PlayerSettingsDbo, Playe
     };
 
     public PlayerSettingsDto ToDto(PlayerSettingsDbo dbo) => new(
-        dbo.Id, 
-        dbo.PlayerId, 
-        dbo.EventType, 
-        dbo.MusicVolume, 
-        dbo.SfxVolume, 
-        dbo.TextSpeed);
+        dbo.Id,
+        dbo.PlayerId,
+        dbo.EventType,
+        dbo.MusicVolume,
+        dbo.SfxVolume,
+        dbo.TextSpeed
+    );
 }

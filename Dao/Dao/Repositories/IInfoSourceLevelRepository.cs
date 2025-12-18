@@ -1,4 +1,3 @@
-using System;
 using System.Threading.Tasks;
 using Core.EFCore;
 using Dao.Entities;
@@ -17,4 +16,5 @@ public interface IInfoSourceLevelRepository : IRepository
 public class InfoSourceLevelRepository(
     ISingletonDataContext dataContext,
     IEntityConverter<InfoSourceLevelDbo, InfoSourceLevelDto> converter
-) : RepositoryBase<InfoSourceLevelDbo, InfoSourceLevelDto, int>(dataContext, converter, x => x.Id), IInfoSourceLevelRepository;
+) : RepositoryBase<InfoSourceLevelDbo, InfoSourceLevelDto, int>(dataContext, converter, x => x.Id),
+    IInfoSourceLevelRepository;

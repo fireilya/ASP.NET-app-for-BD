@@ -13,6 +13,6 @@ public class InfoSourceQuestResourceConverter : IEntityConverter<InfoSourceQuest
         ResourceId = dto.ResourceId,
     };
 
-    public InfoSourceQuestResourceDto ToDto(InfoSourceQuestResourceDbo dbo) => 
+    public InfoSourceQuestResourceDto ToDto(InfoSourceQuestResourceDbo dbo) =>
         new(dbo.Id, dbo.InfoSourceId, dbo.ResourceId);
 }
