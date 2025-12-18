@@ -12,4 +12,7 @@ public class ActionAreaDbo
 
     [Column("path_to_texture"), MaxLength(50)]
     public required string PathToTexture { get; set; }
+
+    [Column("name"), MaxLength(30)]
+    public required string Name { get; set; }
 }

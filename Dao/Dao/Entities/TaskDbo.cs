@@ -10,9 +10,6 @@ public class TaskDbo
     [Column("id"), Key]
     public required Guid Id { get; set; }
 
-    [Column("affected_entity_id")]
-    public required Guid AffectedEntityId { get; set; }
-
     [Column("location_id")]
     public required Guid LocationId { get; set; }
 
@@ -24,4 +21,7 @@ public class TaskDbo
 
     [Column("day_limit")]
     public required short DayLimit { get; set; }
+
+    [Column("is_true")]
+    public required bool IsTrue { get; set; }
 }

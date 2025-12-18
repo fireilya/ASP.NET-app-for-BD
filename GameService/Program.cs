@@ -1,9 +1,11 @@
 using Dao.Configuration;
+using GameService.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services
    .AddDao()
+   .AddStorages()
    .AddSwaggerGen()
    .AddControllers();
 

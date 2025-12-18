@@ -9,13 +9,19 @@ public class TaskConverter : IEntityConverter<TaskDbo, TaskDto>
     public TaskDbo ToDbo(TaskDto dto) => new()
     {
         Id = dto.Id,
-        AffectedEntityId = dto.AffectedEntityId,
         LocationId = dto.LocationId,
         Name = dto.Name,
         Target = dto.Target,
         DayLimit = dto.DayLimit,
+        IsTrue = dto.IsTrue,
     };
 
-    public TaskDto ToDto(TaskDbo dbo) =>
-        new(dbo.Id, dbo.AffectedEntityId, dbo.LocationId, dbo.Name, dbo.Target, dbo.DayLimit);
+    public TaskDto ToDto(TaskDbo dbo) => new(
+        dbo.Id,
+        dbo.LocationId,
+        dbo.Name,
+        dbo.Target,
+        dbo.DayLimit,
+        dbo.IsTrue
+    );
 }
