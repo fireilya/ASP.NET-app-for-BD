@@ -24,4 +24,7 @@ public class TaskDbo
 
     [Column("day_limit")]
     public required short DayLimit { get; set; }
+    
+    [Column("is_true")]
+    public required bool IsTrue { get; set; }
 }

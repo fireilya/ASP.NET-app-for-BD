@@ -14,8 +14,9 @@ public class TaskConverter : IEntityConverter<TaskDbo, TaskDto>
         Name = dto.Name,
         Target = dto.Target,
         DayLimit = dto.DayLimit,
+        IsTrue = dto.IsTrue
     };
 
     public TaskDto ToDto(TaskDbo dbo) =>
-        new(dbo.Id, dbo.AffectedEntityId, dbo.LocationId, dbo.Name, dbo.Target, dbo.DayLimit);
+        new(dbo.Id, dbo.AffectedEntityId, dbo.LocationId, dbo.Name, dbo.Target, dbo.DayLimit, dbo.IsTrue);
 }

@@ -10,7 +10,8 @@ public class ActionAreaConverter : IEntityConverter<ActionAreaDbo, ActionAreaDto
     {
         Id = dto.Id,
         PathToTexture = dto.PathToTexture,
+        Name = dto.Name,
     };
 
-    public ActionAreaDto ToDto(ActionAreaDbo dbo) => new(dbo.Id, dbo.PathToTexture);
+    public ActionAreaDto ToDto(ActionAreaDbo dbo) => new(dbo.Id, dbo.PathToTexture,  dbo.Name);
 }
