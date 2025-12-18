@@ -11,14 +11,14 @@ public class ActionAreaController(
 ) : ControllerBase
 {
     [HttpPost]
-    public async Task<IActionResult> CreateTool([FromBody] ActionArea actionArea)
+    public async Task<IActionResult> CreateActionArea([FromBody] ActionArea actionArea)
     {
         await actionAreaStorage.StoreAsync(actionArea);
         return Ok();
     }
 
     [HttpGet(nameof(actionAreaId))]
-    public async Task<IActionResult> GetTool([FromRoute] Guid actionAreaId)
+    public async Task<IActionResult> GetActionArea([FromRoute] Guid actionAreaId)
     {
         var actionArea = await actionAreaStorage.FindAsync(actionAreaId);
         if (actionArea is null)
