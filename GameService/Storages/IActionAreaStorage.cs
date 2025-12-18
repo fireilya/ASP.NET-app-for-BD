@@ -7,7 +7,7 @@ namespace GameService.Storages;
 public interface IActionAreaStorage
 {
     Task<ActionArea?> FindAsync(Guid id);
-    Task SaveAsync(ActionArea actionArea);
+    Task StoreAsync(ActionArea actionArea);
 }
 
 public class ActionAreaStorage(
@@ -113,7 +113,7 @@ public class ActionAreaStorage(
         );
     }
 
-    public async Task SaveAsync(ActionArea actionArea)
+    public async Task StoreAsync(ActionArea actionArea)
     {
         await actionAreaRepository.CreateAsync(
             new ActionAreaDto(actionArea.Id, actionArea.PathToTexture, actionArea.Name)
