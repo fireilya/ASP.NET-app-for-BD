@@ -10,8 +10,8 @@ namespace Dao.Storages;
 
 public interface IActionAreaStorage
 {
-    Task<ActionArea?> GetDomainByIdAsync(Guid id);
-    Task UploadDomainAsync(ActionArea actionArea);
+    Task<ActionArea?> FindAsync(Guid id);
+    Task SaveAsync(ActionArea actionArea);
 }
 
 public class ActionAreaStorage(
@@ -25,7 +25,7 @@ public class ActionAreaStorage(
     INeutralizerRepository neutralizerRepository
 ) : IActionAreaStorage
 {
-    public async Task<ActionArea?> GetDomainByIdAsync(Guid id)
+    public async Task<ActionArea?> FindAsync(Guid id)
     {
         var actionAreaDto = await actionAreaRepository.FindAsync(id);
         // TODO: Обработка null случая
@@ -117,7 +117,7 @@ public class ActionAreaStorage(
         );
     }
 
-    public async Task UploadDomainAsync(ActionArea actionArea)
+    public async Task SaveAsync(ActionArea actionArea)
     {
         await actionAreaRepository.CreateAsync(
             new ActionAreaDto(actionArea.Id, actionArea.PathToTexture, actionArea.Name)
@@ -132,7 +132,6 @@ public class ActionAreaStorage(
             {
                 await taskRepository.CreateAsync(
                     new TaskDto(
-                        Guid.NewGuid(),
                         task.Id,
                         location.Id,
                         task.Name,
