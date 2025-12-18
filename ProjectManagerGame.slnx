@@ -14,9 +14,10 @@
     <Project Path="Dao/Dao/Dao.csproj" />
   </Folder>
   <Folder Name="/Domain/">
-    <Project Path="Domain\Domain\Domain.csproj" Type="Classic C#" />
+    <Project Path="Domain\Domain\Domain.csproj" Type="C#" />
   </Folder>
   <Folder Name="/GameService/">
+    <Project Path="GameService.UnitTests/GameService.UnitTests.csproj" />
     <Project Path="GameService/GameService.csproj" />
   </Folder>
   <Folder Name="/Solution Items/">
