@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
 using AutoFixture;
@@ -15,8 +16,8 @@ public class ActionAreaStorageTest : UnitTestBase
     {
         var actionArea = new ActionArea(
             Guid.NewGuid(),
-            Guid.NewGuid().ToString(),
-            Fixture.Create<string>(),
+            CreateString(20),
+            CreateString(20),
             [CreateLocation(), CreateLocation()]
         );
         var stringifyActionArea = JsonSerializer.Serialize(actionArea);
@@ -27,8 +28,8 @@ public class ActionAreaStorageTest : UnitTestBase
     {
         return new Location(
             Guid.NewGuid(),
-            Guid.NewGuid().ToString(),
-            Guid.NewGuid().ToString(),
+            CreateString(20),
+            CreateString(20),
             CreateGameTasks(taskCount),
             Fixture.Create<Risk>()
         );
@@ -42,15 +43,30 @@ public class ActionAreaStorageTest : UnitTestBase
         {
             return new GameTask(
                 Guid.NewGuid(),
-                Guid.NewGuid().ToString(),
+                CreateString(20),
                 Fixture.Create<int>(),
                 Fixture.Create<short>(),
                 [
-                    Fixture.Build<CapacitySubtask>().Without(x => x.PreviousSubtask).Without(x => x.Parent).Create(),
-                    Fixture.Build<ProcessSubtask>().Without(x => x.PreviousSubtask).Without(x => x.Parent).Create(),
+                    new CapacitySubtask(
+                        Guid.NewGuid(),
+                        CreateString(20),
+                        Fixture.Create<int>(),
+                        Fixture.Create<bool>(),
+                        Fixture.Create<int>(),
+                        Fixture.Create<Dictionary<Guid, short>>()
+                    ),
+                    new ProcessSubtask(
+                        Guid.NewGuid(),
+                        CreateString(20),
+                        Fixture.Create<int>(),
+                        Fixture.Create<bool>(),
+                        Guid.NewGuid()
+                    ),
                 ],
                 Fixture.Create<bool>()
             );
         }
     }
+
+    private string CreateString(int lengthLimit) => Fixture.Create<string>()[..lengthLimit];
 }
