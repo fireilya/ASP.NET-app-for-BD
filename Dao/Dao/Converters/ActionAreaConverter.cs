@@ -13,5 +13,5 @@ public class ActionAreaConverter : IEntityConverter<ActionAreaDbo, ActionAreaDto
         Name = dto.Name,
     };
 
-    public ActionAreaDto ToDto(ActionAreaDbo dbo) => new(dbo.Id, dbo.PathToTexture,  dbo.Name);
+    public ActionAreaDto ToDto(ActionAreaDbo dbo) => new(dbo.Id, dbo.PathToTexture, dbo.Name);
 }

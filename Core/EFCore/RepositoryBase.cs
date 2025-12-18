@@ -12,8 +12,24 @@ public abstract class RepositoryBase<TDbo, TDto, TPrimaryKey>(
     where TDbo : class
     where TDto : class
 {
+    private readonly Func<TDbo, TPrimaryKey> keyPickerFunc = keyPicker.Compile();
+
     protected ISingletonDataContext DataContext { get; } = dataContext;
     protected IEntityConverter<TDbo, TDto> Converter { get; } = converter;
+
+    public async Task CreateOrUpdateAsync(TDto dto)
+    {
+        var dbo = Converter.ToDbo(dto);
+        var foundDbo = await DataContext.FindAsync<TDbo, TPrimaryKey>(keyPickerFunc(dbo));
+        if (foundDbo is null)
+        {
+            await DataContext.InsertAsync(dbo);
+        }
+        else
+        {
+            await DataContext.UpdateAsync(dbo);
+        }
+    }
 
     public Task CreateAsync(TDto dto) => DataContext.InsertAsync(Converter.ToDbo(dto));
 
