@@ -17,8 +17,9 @@ public class ToolController(
         return Ok();
     }
 
-    [HttpGet(nameof(toolId))]
-    public async Task<IActionResult> GetTool([FromRoute] Guid toolId)
+    [HttpGet("{toolId}")]
+
+public async Task<IActionResult> GetTool([FromRoute] Guid toolId)
     {
         var tool = await toolStorage.FindAsync(toolId);
         if (tool is null)

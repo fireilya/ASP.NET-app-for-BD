@@ -8,7 +8,7 @@ public class IconConverter : IEntityConverter<IconDbo, IconDto>
 {
     public IconDbo ToDbo(IconDto dto) => new IconDbo
     {
-        Id = dto.Id,
+        Id = dto.Path,
         Body = dto.Body,
     };
 
