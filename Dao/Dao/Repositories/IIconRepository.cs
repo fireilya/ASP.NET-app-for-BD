@@ -14,4 +14,4 @@ public interface IIconRepository : IRepository
 public class IconRepository(
     ISingletonDataContext dataContext,
     IEntityConverter<IconDbo, IconDto> converter
-) : RepositoryBase<IconDbo, IconDto, string>(dataContext, converter, x => x.Id), IIconRepository;
+) : RepositoryBase<IconDbo, IconDto, string>(dataContext, converter, x => x.Path), IIconRepository;

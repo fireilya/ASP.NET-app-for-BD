@@ -7,7 +7,7 @@ namespace Dao.Entities;
 public class IconDbo
 {
     [Column("id"), Key]
-    public required string Id { get; set; }
+    public required string Path { get; set; }
 
     [Column("body"), Required]
     public required byte[] Body { get; set; }
