@@ -24,7 +24,7 @@ public class IconRepositoryTest : IntegrationTestBase
         await Repository.CreateOrUpdateAsync(dto);
 
         // Assert
-        var foundIcon = await DataContext.FindAsync<IconDbo, string>(dto.Id);
+        var foundIcon = await DataContext.FindAsync<IconDbo, string>(dto.Path);
         foundIcon.Should().NotBeNull();
         foundIcon.Should().BeEquivalentTo(dto);
     }
@@ -34,14 +34,14 @@ public class IconRepositoryTest : IntegrationTestBase
     {
         // Arrange
         var dbo = Fixture.Create<IconDbo>();
-        var dto = Fixture.Build<IconDto>().With(x => x.Id, dbo.Id).Create();
+        var dto = Fixture.Build<IconDto>().With(x => x.Path, dbo.Id).Create();
         await DataContext.InsertAsync(dbo);
 
         // Act
         await Repository.CreateOrUpdateAsync(dto);
 
         // Assert
-        var foundIcon = await DataContext.FindAsync<IconDbo, string>(dto.Id);
+        var foundIcon = await DataContext.FindAsync<IconDbo, string>(dto.Path);
         foundIcon.Should().NotBeNull();
         foundIcon.Should().BeEquivalentTo(dto);
     }
