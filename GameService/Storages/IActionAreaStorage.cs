@@ -37,7 +37,7 @@ public class ActionAreaStorage(
         {
             var locationTasks = await BuildTasksArrayForLocationAsync(dto.Id);
             var locationRisk = await BuildRiskOnLocation(dto.Id);
-            answer.Add(new Location(dto.Id, dto.Name, dto.PathToIcon, locationTasks, locationRisk));
+            answer.Add(new Location(dto.Id, dto.Name, dto.PathToIcon, locationTasks, locationRisk, dto.MappingKey));
         }
 
         return answer.ToArray();
@@ -60,7 +60,7 @@ public class ActionAreaStorage(
     {
         var subtasksDto = await subtaskRepository.SelectByTaskIdAsync(taskId);
         var answer = new List<Subtask>();
-        foreach (var dto in subtasksDto)
+        foreach (var dto in subtasksDto.OrderBy(x => x.Order))
         {
             if (dto.IsUseCapacityTool)
             {
@@ -73,15 +73,11 @@ public class ActionAreaStorage(
                     dto.Id,
                     dto.Name,
                     dto.BaseEffectiveness,
+                    dto.Order,
                     dto.IsUseCapacityTool,
                     baseCapacity.Capacity,
                     capacityByResource
                 );
-                if (answer.Count != 0)
-                {
-                    subtask.PreviousSubtask = answer.Last();
-                }
-
                 answer.Add(subtask);
                 continue;
             }
@@ -93,6 +89,7 @@ public class ActionAreaStorage(
                     dto.Id,
                     dto.Name,
                     dto.BaseEffectiveness,
+                    dto.Order,
                     dto.IsUseCapacityTool,
                     subtaskToolDto!.ResourceId
                 )
@@ -105,13 +102,16 @@ public class ActionAreaStorage(
     private async Task<Risk> BuildRiskOnLocation(Guid locationId)
     {
         var riskDto = await riskRepository.FindRiskForLocationAsync(locationId);
-        var neutralizerDto = await neutralizerRepository.FindAsync(riskDto.NeutralizerId);
+        
         // TODO: Обработка null случая
         return new Risk(
             riskDto.Id,
+            riskDto.Name,
             riskDto.PathToIcon,
             riskDto.Description,
-            new Neutralizer(neutralizerDto!.Id, neutralizerDto.Name, neutralizerDto.PathToIcon)
+            riskDto.HappenedMessage,
+            riskDto.BadInfluenceMessage,
+            riskDto.NeutralizerId
         );
     }
 
@@ -123,7 +123,7 @@ public class ActionAreaStorage(
         foreach (var location in actionArea.Locations)
         {
             await locationRepository.CreateAsync(
-                new LocationDto(location.Id, actionArea.Id, location.Name, location.PathToIcon)
+                new LocationDto(location.Id, actionArea.Id, location.Name, location.PathToIcon, location.MappingKey)
             );
 
             foreach (var task in location.Tasks)
@@ -146,7 +146,7 @@ public class ActionAreaStorage(
                     await subtaskRepository.CreateAsync(
                         new SubtaskDto(
                             subtask.Id,
-                            subtask.Parent!.Id,
+                            subtask.GameTask.Id,
                             subtask.Name,
                             (short)i,
                             subtask.BaseEfficiency,
