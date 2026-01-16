@@ -34,7 +34,7 @@ public class IconRepositoryTest : IntegrationTestBase
     {
         // Arrange
         var dbo = Fixture.Create<IconDbo>();
-        var dto = Fixture.Build<IconDto>().With(x => x.Path, dbo.Id).Create();
+        var dto = Fixture.Build<IconDto>().With(x => x.Path, dbo.Path).Create();
         await DataContext.InsertAsync(dbo);
 
         // Act
