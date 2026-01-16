@@ -18,4 +18,7 @@ public class LocationDbo
 
     [Column("path_to_icon"), MaxLength(50)]
     public required string PathToIcon { get; set; }
+    
+    [Column("mapping_key")]
+    public required short MappingKey { get; set; }
 }

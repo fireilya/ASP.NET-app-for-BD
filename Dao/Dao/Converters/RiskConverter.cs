@@ -11,14 +11,20 @@ public class RiskConverter : IEntityConverter<RiskDbo, RiskDto>
         Id = dto.Id,
         NeutralizerId = dto.NeutralizerId,
         LocationId = dto.LocationId,
-        Description = dto.Description,
+        Name = dto.Name,
         PathToIcon = dto.PathToIcon,
+        Description = dto.Description,
+        HappenedMessage = dto.HappenedMessage,
+        BadInfluenceMessage = dto.BadInfluenceMessage,
     };
 
     public RiskDto ToDto(RiskDbo dbo) => new(
         dbo.Id,
+        dbo.Name,
         dbo.PathToIcon,
         dbo.Description,
+        dbo.HappenedMessage,
+        dbo.BadInfluenceMessage,
         dbo.NeutralizerId,
         dbo.LocationId
     );

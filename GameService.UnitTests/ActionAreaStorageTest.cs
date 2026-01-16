@@ -31,7 +31,8 @@ public class ActionAreaStorageTest : UnitTestBase
             CreateString(20),
             CreateString(20),
             CreateGameTasks(taskCount),
-            Fixture.Create<Risk>()
+            Fixture.Create<Risk>(),
+            Fixture.Create<short>()
         );
     }
 
@@ -51,6 +52,7 @@ public class ActionAreaStorageTest : UnitTestBase
                         Guid.NewGuid(),
                         CreateString(20),
                         Fixture.Create<int>(),
+                        Fixture.Create<short>(),
                         Fixture.Create<bool>(),
                         Fixture.Create<int>(),
                         Fixture.Create<Dictionary<Guid, short>>()
@@ -59,6 +61,7 @@ public class ActionAreaStorageTest : UnitTestBase
                         Guid.NewGuid(),
                         CreateString(20),
                         Fixture.Create<int>(),
+                        Fixture.Create<short>(),
                         Fixture.Create<bool>(),
                         Guid.NewGuid()
                     ),
